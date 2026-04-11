@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Customer Reviews | Precision Painting Co. — Portland, OR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style></style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <span>📞 <a href="tel:5035550182">(503) 555-0182</a></span>
+    <span class="top-bar__sep">|</span>
+    <span>Licensed &amp; Insured · Portland, OR</span>
+    <span class="top-bar__sep">|</span>
+    <a href="request-quote.html">Free Estimate →</a>
+  </div>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-logo">
+        <div class="logo-mark">P</div>Precision<span class="logo-accent">Paint</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <div class="nav-dropdown">
+          <a href="services.html">Services</a>
+          <div class="nav-dropdown__menu">
+            <a href="services.html#interior">Interior Painting</a><a href="services.html#exterior">Exterior Painting</a>
+            <a href="services.html#residential">Residential</a><a href="services.html#commercial">Commercial</a>
+            <a href="services.html#cabinet">Cabinet Painting</a><a href="services.html#color">Color Consultation</a>
+            <a href="services.html#drywall">Drywall Repair</a><a href="services.html#wallpaper">Wallpaper Removal</a>
+            <a href="services.html#deck">Deck &amp; Fence</a>
+          </div>
+        </div>
+        <a href="gallery.html">Gallery</a><a href="testimonials.html">Reviews</a>
+        <a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-end">
+        <a href="tel:5035550182" class="nav-phone">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.28 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          <span>(503) 555-0182</span>
+        </a>
+        <a href="request-quote.html" class="btn btn-amber btn-sm">Free Quote</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu__overlay"></div>
+    <div class="mobile-menu__panel">
+      <a href="index.html">Home</a><a href="services.html#interior">Interior Painting</a><a href="#exterior">Exterior
+        Painting</a>
+      <a href="services.html#residential">Residential</a><a href="services.html#commercial">Commercial</a><a
+        href="services.html#cabinet">Cabinets</a>
+      <a href="services.html#color">Color Consultation</a><a href="services.html#drywall">Drywall</a>
+      <a href="services.html#wallpaper">Wallpaper</a><a href="services.html#deck">Deck &amp; Fence</a>
+      <a href="gallery.html">Gallery</a><a href="testimonials.html">Reviews</a><a href="about.html">About</a>
+      <a href="request-quote.html" class="btn btn-amber" style="margin-top:1.25rem;text-align:center;">Free Estimate
+        →</a>
+    </div>
+  </div>
+
+  <section class="page-hero page-hero--sm">
+    <div class="page-hero__bg">
+      <div class="hero-stripes"></div>
+      <div class="hero-glow"></div>
+    </div>
+    <div class="container">
+      <nav class="breadcrumbs"><a href="index.html">Home</a><span class="breadcrumbs__sep">/</span><span>Reviews</span>
+      </nav>
+      <p class="overline animate-up">Client Reviews</p>
+      <h1 class="display-title animate-up-1"
+        style="font-size:clamp(2.2rem,5vw,4rem);color:var(--white);max-width:680px;">What Portland homeowners say about
+        <em>Precision Paint</em>
+      </h1>
+      <p class="body-lg animate-up-2" style="max-width:560px;margin-top:1.25rem;color:rgba(255,255,255,0.65);">340+
+        verified 5-star reviews across Google, Yelp, and Houzz.</p>
+
+    </div>
+  </section>
+  <div
+    style="background:var(--paper);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.25rem 0;">
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
+          ⭐ <strong style="color:var(--ink);">5.0</strong> Google Rating (340+ reviews)</div>
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
+          🏅 Licensed &amp; Insured</div>
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
+          🛡 2-Year Workmanship Warranty</div>
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
+          ✓ Free Detailed Estimates</div>
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
+          📅 Same-Week Scheduling</div>
+      </div>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div style="display:flex;gap:3rem;align-items:flex-start;margin-bottom:4rem;flex-wrap:wrap;" class="reveal">
+        <div>
+          <p style="font-family:var(--font-disp);font-size:5rem;font-weight:700;line-height:1;color:var(--navy);">5.0
+          </p>
+          <p style="color:var(--amber);font-size:1.5rem;letter-spacing:.08em;">★★★★★</p>
+          <p style="font-size:.88rem;color:var(--ink-muted);margin-top:.4rem;">340+ reviews · Google &amp; Yelp</p>
+        </div>
+        <div style="flex:1;">
+          <div style="display:flex;flex-direction:column;gap:.4rem;">
+            <div style="display:flex;align-items:center;gap:.75rem;"><span
+                style="font-size:.78rem;width:25px;">5★</span>
+              <div style="flex:1;height:6px;background:var(--border);border-radius:999px;overflow:hidden;">
+                <div style="height:100%;background:var(--amber);width:96%;border-radius:999px;"></div>
+              </div><span style="font-size:.75rem;color:var(--ink-muted);width:32px;">96%</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;"><span
+                style="font-size:.78rem;width:25px;">4★</span>
+              <div style="flex:1;height:6px;background:var(--border);border-radius:999px;overflow:hidden;">
+                <div style="height:100%;background:var(--amber);width:3%;border-radius:999px;"></div>
+              </div><span style="font-size:.75rem;color:var(--ink-muted);width:32px;">3%</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;"><span
+                style="font-size:.78rem;width:25px;">3★</span>
+              <div style="flex:1;height:6px;background:var(--border);border-radius:999px;overflow:hidden;">
+                <div style="height:100%;background:var(--amber);width:1%;border-radius:999px;"></div>
+              </div><span style="font-size:.75rem;color:var(--ink-muted);width:32px;">1%</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;"><span
+                style="font-size:.78rem;width:25px;">2★</span>
+              <div style="flex:1;height:6px;background:var(--border);border-radius:999px;overflow:hidden;">
+                <div style="height:100%;background:var(--amber);width:0%;border-radius:999px;"></div>
+              </div><span style="font-size:.75rem;color:var(--ink-muted);width:32px;">0%</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:.75rem;"><span
+                style="font-size:.78rem;width:25px;">1★</span>
+              <div style="flex:1;height:6px;background:var(--border);border-radius:999px;overflow:hidden;">
+                <div style="height:100%;background:var(--amber);width:0%;border-radius:999px;"></div>
+              </div><span style="font-size:.75rem;color:var(--ink-muted);width:32px;">0%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;">
+        <div class="testimonial reveal">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__text">Precision Paint transformed our 1960s ranch. The crew was on time every day,
+            protected all our floors and furniture, and the finish is absolutely flawless.</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">TR</div>
+            <div>
+              <div class="testimonial__name">Tom R.</div>
+              <div class="testimonial__role">Interior repaint · SW Portland</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial reveal">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__text">Best painting experience I've had. The color consultation alone was worth it —
+            they helped us pick colors we never would have tried ourselves.</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">JS</div>
+            <div>
+              <div class="testimonial__name">Jennifer S.</div>
+              <div class="testimonial__role">Whole-home color refresh</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial reveal">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__text">Our exterior was a disaster. Their prep work alone took two days. The final
+            result looks like a brand-new house.</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">MP</div>
+            <div>
+              <div class="testimonial__name">Marcus P.</div>
+              <div class="testimonial__role">Exterior + trim paint</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial reveal">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__text">Our kitchen cabinets look factory-painted. Nobody believes they were ever
+            wood-grain laminate. Absolutely stunning.</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">KL</div>
+            <div>
+              <div class="testimonial__name">Karen L.</div>
+              <div class="testimonial__role">Cabinet painting</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial reveal">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__text">Entire office repainted over a long weekend. Came in Monday to a perfect result
+            with zero smell. Very professional operation.</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">AW</div>
+            <div>
+              <div class="testimonial__name">Alex W.</div>
+              <div class="testimonial__role">Commercial office</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial reveal">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__text">My deck looks better than it did new. They power washed, sanded, and applied two
+            coats of stain with a brush — not a roller. That detail matters.</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">SH</div>
+            <div>
+              <div class="testimonial__name">Sarah H.</div>
+              <div class="testimonial__role">Deck staining</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial reveal">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__text">I'd tried to remove wallpaper myself and made a mess. These guys removed three
+            rooms of wallpaper cleanly in two days. Then painted perfectly.</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">RD</div>
+            <div>
+              <div class="testimonial__name">Rachel D.</div>
+              <div class="testimonial__role">Wallpaper removal</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial reveal">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__text">From the estimate to the final walkthrough — every step was professional. They
+            showed up when they said, did what they promised, and left the house spotless.</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">CB</div>
+            <div>
+              <div class="testimonial__name">Chris B.</div>
+              <div class="testimonial__role">NE Portland Victorian</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial reveal">
+          <div class="testimonial__stars">★★★★★</div>
+          <p class="testimonial__text">Water damaged walls that had been painted over for years. They stripped
+            everything, properly repaired it, and the walls look brand new.</p>
+          <div class="testimonial__author">
+            <div class="testimonial__avatar">NT</div>
+            <div>
+              <div class="testimonial__name">Nina T.</div>
+              <div class="testimonial__role">Drywall + interior</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:3rem;" class="reveal">
+        <a href="https://g.page/precisionpaintco" class="btn btn-navy btn-lg">Read All Reviews on Google →</a>
+      </div>
+    </div>
+  </section>
+  <section style="background:var(--navy);padding:4.5rem 0;position:relative;overflow:hidden;">
+    <div
+      style="position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent 0px,transparent 40px,rgba(255,255,255,.015) 40px,rgba(255,255,255,.015) 41px);pointer-events:none;">
+    </div>
+    <div
+      style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(232,168,50,.1) 0%,transparent 70%);top:-150px;right:-80px;pointer-events:none;">
+    </div>
+    <div class="container" style="text-align:center;position:relative;z-index:2;">
+      <p class="overline reveal" style="color:var(--amber);">Take the Next Step</p>
+      <h2 class="section-title section-title--white reveal" style="margin-bottom:1rem;">Ready for a transformation?</h2>
+      <p class="reveal" style="color:rgba(255,255,255,.55);max-width:500px;margin:0 auto 2.5rem;font-size:1rem;">Get
+        your free detailed estimate today. We respond within 2 hours.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;" class="reveal">
+        <a href="request-quote.html" class="btn btn-amber btn-xl">Get Free Estimate</a>
+        <a href="tel:5035550182" class="btn btn-outline-white btn-xl">📞 (503) 555-0182</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="logo-mark">P</div>Precision<span class="logo-accent">Paint</span>
+        </a>
+        <p class="footer-tagline">Portland's most trusted residential and commercial painting contractor since 2008.
+          Licensed, bonded, insured.</p>
+        <div class="footer-contact">
+          <a href="tel:5035550182">📞 (503) 555-0182</a>
+          <a href="mailto:hello@precisionpaintco.com">✉ hello@precisionpaintco.com</a>
+          <span>📍 Portland, OR · Serving Metro Area</span>
+        </div>
+        <div class="footer-badges">
+          <span class="footer-badge">Licensed #CCB-182744</span>
+          <span class="footer-badge">Fully Insured</span>
+          <span class="footer-badge">EPA RRP Certified</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="interior-painting.html">Interior Painting</a>
+        <a href="exterior-painting.html">Exterior Painting</a>
+        <a href="cabinet-painting.html">Cabinet Painting</a>
+        <a href="drywall-repair.html">Drywall Repair</a>
+        <a href="color-consultation.html">Color Consultation</a>
+        <a href="deck-fence-staining.html">Deck &amp; Fence Staining</a>
+        <a href="wallpaper-removal.html">Wallpaper Removal</a>
+        <a href="commercial-painting.html">Commercial</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="gallery.html">Portfolio</a>
+        <a href="testimonials.html">Reviews</a>
+        <a href="warranty.html">Our Warranty</a>
+        <a href="service-area.html">Service Area</a>
+        <a href="blog.html">Blog</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get Started</h4>
+        <a href="request-quote.html">Free Estimate</a>
+        <a href="booking.html">Book a Consult</a>
+        <a href="estimate-calculator.html">Cost Calculator</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="warranty.html">2-Year Warranty</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2024 Precision Painting Co. All rights reserved.</span>
+        <span>
+          <a href="privacy-policy.html">Privacy Policy</a> ·
+          <a href="terms.html">Terms of Service</a> ·
+          <a href="sitemap.html">Sitemap</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="shared.js"></script>
+
+</body>
+
+</html>

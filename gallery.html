@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Project Gallery | Precision Painting Co. — Portland, OR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .gallery-filters {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r);
+      padding: .45rem 1.1rem;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .05em;
+      color: var(--ink-muted);
+      cursor: pointer;
+      transition: background var(--t), border-color var(--t), color var(--t);
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+
+    .gallery-masonry {
+      columns: 3;
+      column-gap: 1.25rem;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 1.25rem;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .gallery-item:hover .gallery-item__overlay {
+      opacity: 1;
+    }
+
+    .gallery-item__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 30, 46, .75);
+      opacity: 0;
+      transition: opacity var(--t-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .gallery-item__label {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber);
+    }
+
+    .gallery-item__title {
+      font-family: var(--font-disp);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    @media(max-width:900px) {
+      .gallery-masonry {
+        columns: 2;
+      }
+    }
+
+    @media(max-width:540px) {
+      .gallery-masonry {
+        columns: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <span>📞 <a href="tel:5035550182">(503) 555-0182</a></span>
+    <span class="top-bar__sep">|</span>
+    <span>Licensed &amp; Insured · Portland, OR</span>
+    <span class="top-bar__sep">|</span>
+    <a href="request-quote.html">Free Estimate →</a>
+  </div>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-logo">
+        <div class="logo-mark">P</div>Precision<span class="logo-accent">Paint</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <div class="nav-dropdown">
+          <a href="services.html">Services</a>
+          <div class="nav-dropdown__menu">
+            <a href="services.html#interior">Interior Painting</a><a href="services.html#exterior">Exterior Painting</a>
+            <a href="services.html#residential">Residential</a><a href="services.html#commercial">Commercial</a>
+            <a href="services.html#cabinet">Cabinet Painting</a><a href="services.html#color">Color Consultation</a>
+            <a href="services.html#drywall">Drywall Repair</a><a href="services.html#wallpaper">Wallpaper Removal</a>
+            <a href="services.html#deck">Deck &amp; Fence</a>
+          </div>
+        </div>
+        <a href="gallery.html">Gallery</a><a href="testimonials.html">Reviews</a>
+        <a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-end">
+        <a href="tel:5035550182" class="nav-phone">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.28 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          <span>(503) 555-0182</span>
+        </a>
+        <a href="request-quote.html" class="btn btn-amber btn-sm">Free Quote</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu__overlay"></div>
+    <div class="mobile-menu__panel">
+      <a href="index.html">Home</a><a href="services.html#interior">Interior Painting</a><a href="#exterior">Exterior
+        Painting</a>
+      <a href="services.html#residential">Residential</a><a href="services.html#commercial">Commercial</a><a
+        href="services.html#cabinet">Cabinets</a>
+      <a href="services.html#color">Color Consultation</a><a href="services.html#drywall">Drywall</a>
+      <a href="services.html#wallpaper">Wallpaper</a><a href="services.html#deck">Deck &amp; Fence</a>
+      <a href="gallery.html">Gallery</a><a href="testimonials.html">Reviews</a><a href="about.html">About</a>
+      <a href="request-quote.html" class="btn btn-amber" style="margin-top:1.25rem;text-align:center;">Free Estimate
+        →</a>
+    </div>
+  </div>
+
+  <section class="page-hero ">
+    <div class="page-hero__bg">
+      <div class="hero-stripes"></div>
+      <div class="hero-glow"></div>
+    </div>
+    <div class="container">
+      <nav class="breadcrumbs"><a href="index.html">Home</a><span class="breadcrumbs__sep">/</span><span>Gallery</span>
+      </nav>
+      <p class="overline animate-up">Our Work</p>
+      <h1 class="display-title animate-up-1"
+        style="font-size:clamp(2.2rem,5vw,4rem);color:var(--white);max-width:680px;">A portfolio of <em>precision</em>
+      </h1>
+      <p class="body-lg animate-up-2" style="max-width:560px;margin-top:1.25rem;color:rgba(255,255,255,0.65);">2,000+
+        projects completed across Portland and the metro area.</p>
+
+    </div>
+  </section>
+  <div
+    style="background:var(--paper);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.25rem 0;">
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
+          ⭐ <strong style="color:var(--ink);">5.0</strong> Google Rating (340+ reviews)</div>
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
+          🏅 Licensed &amp; Insured</div>
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
+          🛡 2-Year Workmanship Warranty</div>
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
+          ✓ Free Detailed Estimates</div>
+        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
+          📅 Same-Week Scheduling</div>
+      </div>
+    </div>
+  </div>
+  <section class="section">
+    <div class="container">
+      <div class="gallery-filters reveal">
+        <button class="filter-btn active">All Projects</button>
+        <button class="filter-btn">Interior</button>
+        <button class="filter-btn">Exterior</button>
+        <button class="filter-btn">Cabinets</button>
+        <button class="filter-btn">Commercial</button>
+        <button class="filter-btn">Deck &amp; Fence</button>
+      </div>
+      <div class="gallery-masonry">
+        <div class="gallery-item reveal">
+          <div class="ph ph-1" style="height:280px;"><span style="font-size:3rem;">🏠</span></div>
+          <div class="gallery-item__overlay"><span class="gallery-item__label">Interior</span><span
+              class="gallery-item__title">SW Portland Ranch</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <div class="ph ph-2" style="height:200px;"></div>
+          <div class="gallery-item__overlay"><span class="gallery-item__label">Exterior</span><span
+              class="gallery-item__title">Lake Oswego Colonial</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <div class="ph ph-3" style="height:340px;"></div>
+          <div class="gallery-item__overlay"><span class="gallery-item__label">Cabinets</span><span
+              class="gallery-item__title">SE Kitchen Refresh</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <div class="ph ph-4" style="height:240px;"></div>
+          <div class="gallery-item__overlay"><span class="gallery-item__label">Commercial</span><span
+              class="gallery-item__title">Pearl District Office</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <div class="ph ph-5" style="height:300px;"></div>
+          <div class="gallery-item__overlay"><span class="gallery-item__label">Exterior</span><span
+              class="gallery-item__title">Beaverton Tudor</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <div class="ph ph-6" style="height:220px;"></div>
+          <div class="gallery-item__overlay"><span class="gallery-item__label">Deck</span><span
+              class="gallery-item__title">Cedar Deck Stain</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <div class="ph ph-7" style="height:260px;"></div>
+          <div class="gallery-item__overlay"><span class="gallery-item__label">Interior</span><span
+              class="gallery-item__title">NE Portland Victorian</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <div class="ph ph-8" style="height:180px;"></div>
+          <div class="gallery-item__overlay"><span class="gallery-item__label">Cabinets</span><span
+              class="gallery-item__title">White Shaker Refresh</span></div>
+        </div>
+        <div class="gallery-item reveal">
+          <div class="ph ph-9" style="height:320px;"></div>
+          <div class="gallery-item__overlay"><span class="gallery-item__label">Exterior</span><span
+              class="gallery-item__title">Tualatin Farmhouse</span></div>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:3rem;" class="reveal">
+        <a href="project-gallery.html" class="btn btn-navy btn-lg">View Full Project Gallery →</a>
+      </div>
+    </div>
+  </section>
+  <section style="background:var(--navy);padding:4.5rem 0;position:relative;overflow:hidden;">
+    <div
+      style="position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent 0px,transparent 40px,rgba(255,255,255,.015) 40px,rgba(255,255,255,.015) 41px);pointer-events:none;">
+    </div>
+    <div
+      style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(232,168,50,.1) 0%,transparent 70%);top:-150px;right:-80px;pointer-events:none;">
+    </div>
+    <div class="container" style="text-align:center;position:relative;z-index:2;">
+      <p class="overline reveal" style="color:var(--amber);">Take the Next Step</p>
+      <h2 class="section-title section-title--white reveal" style="margin-bottom:1rem;">Love what you see?</h2>
+      <p class="reveal" style="color:rgba(255,255,255,.55);max-width:500px;margin:0 auto 2.5rem;font-size:1rem;">Get a
+        free estimate for your project. We work all over Portland metro.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;" class="reveal">
+        <a href="request-quote.html" class="btn btn-amber btn-xl">Get Free Estimate</a>
+        <a href="tel:5035550182" class="btn btn-outline-white btn-xl">📞 (503) 555-0182</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="logo-mark">P</div>Precision<span class="logo-accent">Paint</span>
+        </a>
+        <p class="footer-tagline">Portland's most trusted residential and commercial painting contractor since 2008.
+          Licensed, bonded, insured.</p>
+        <div class="footer-contact">
+          <a href="tel:5035550182">📞 (503) 555-0182</a>
+          <a href="mailto:hello@precisionpaintco.com">✉ hello@precisionpaintco.com</a>
+          <span>📍 Portland, OR · Serving Metro Area</span>
+        </div>
+        <div class="footer-badges">
+          <span class="footer-badge">Licensed #CCB-182744</span>
+          <span class="footer-badge">Fully Insured</span>
+          <span class="footer-badge">EPA RRP Certified</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="interior-painting.html">Interior Painting</a>
+        <a href="exterior-painting.html">Exterior Painting</a>
+        <a href="cabinet-painting.html">Cabinet Painting</a>
+        <a href="drywall-repair.html">Drywall Repair</a>
+        <a href="color-consultation.html">Color Consultation</a>
+        <a href="deck-fence-staining.html">Deck &amp; Fence Staining</a>
+        <a href="wallpaper-removal.html">Wallpaper Removal</a>
+        <a href="commercial-painting.html">Commercial</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="gallery.html">Portfolio</a>
+        <a href="testimonials.html">Reviews</a>
+        <a href="warranty.html">Our Warranty</a>
+        <a href="service-area.html">Service Area</a>
+        <a href="blog.html">Blog</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get Started</h4>
+        <a href="request-quote.html">Free Estimate</a>
+        <a href="booking.html">Book a Consult</a>
+        <a href="estimate-calculator.html">Cost Calculator</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="warranty.html">2-Year Warranty</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2024 Precision Painting Co. All rights reserved.</span>
+        <span>
+          <a href="privacy-policy.html">Privacy Policy</a> ·
+          <a href="terms.html">Terms of Service</a> ·
+          <a href="sitemap.html">Sitemap</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="shared.js"></script>
+
+</body>
+
+</html>

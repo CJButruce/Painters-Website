@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Contact Us | Precision Painting Co. — Portland, OR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+
+    .contact-info-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-info-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .ci-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--r-md);
+      background: var(--amber-dim);
+      border: 1px solid var(--amber-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+
+    @media(max-width:768px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <span>📞 <a href="tel:5035550182">(503) 555-0182</a></span>
+    <span class="top-bar__sep">|</span>
+    <span>Licensed &amp; Insured · Portland, OR</span>
+    <span class="top-bar__sep">|</span>
+    <a href="request-quote.html">Free Estimate →</a>
+  </div>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-logo">
+        <div class="logo-mark">P</div>Precision<span class="logo-accent">Paint</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <div class="nav-dropdown">
+          <a href="services.html">Services</a>
+          <div class="nav-dropdown__menu">
+            <a href="services.html#interior">Interior Painting</a><a href="services.html#exterior">Exterior Painting</a>
+            <a href="services.html#residential">Residential</a><a href="services.html#commercial">Commercial</a>
+            <a href="services.html#cabinet">Cabinet Painting</a><a href="services.html#color">Color Consultation</a>
+            <a href="services.html#drywall">Drywall Repair</a><a href="services.html#wallpaper">Wallpaper Removal</a>
+            <a href="services.html#deck">Deck &amp; Fence</a>
+          </div>
+        </div>
+        <a href="gallery.html">Gallery</a><a href="testimonials.html">Reviews</a>
+        <a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-end">
+        <a href="tel:5035550182" class="nav-phone">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.28 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          <span>(503) 555-0182</span>
+        </a>
+        <a href="request-quote.html" class="btn btn-amber btn-sm">Free Quote</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu__overlay"></div>
+    <div class="mobile-menu__panel">
+      <a href="index.html">Home</a><a href="services.html#interior">Interior Painting</a><a href="#exterior">Exterior
+        Painting</a>
+      <a href="services.html#residential">Residential</a><a href="services.html#commercial">Commercial</a><a
+        href="services.html#cabinet">Cabinets</a>
+      <a href="services.html#color">Color Consultation</a><a href="services.html#drywall">Drywall</a>
+      <a href="services.html#wallpaper">Wallpaper</a><a href="services.html#deck">Deck &amp; Fence</a>
+      <a href="gallery.html">Gallery</a><a href="testimonials.html">Reviews</a><a href="about.html">About</a>
+      <a href="request-quote.html" class="btn btn-amber" style="margin-top:1.25rem;text-align:center;">Free Estimate
+        →</a>
+    </div>
+  </div>
+
+  <section class="page-hero page-hero--sm">
+    <div class="page-hero__bg">
+      <div class="hero-stripes"></div>
+      <div class="hero-glow"></div>
+    </div>
+    <div class="container">
+      <nav class="breadcrumbs"><a href="index.html">Home</a><span class="breadcrumbs__sep">/</span><span>Contact</span>
+      </nav>
+      <p class="overline animate-up">Contact Us</p>
+      <h1 class="display-title animate-up-1"
+        style="font-size:clamp(2.2rem,5vw,4rem);color:var(--white);max-width:680px;">Let's talk about your project</h1>
+      <p class="body-lg animate-up-2" style="max-width:560px;margin-top:1.25rem;color:rgba(255,255,255,0.65);">Free
+        estimates, same-week scheduling, and a crew that shows up when they say.</p>
+
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="reveal">
+          <p class="overline">Reach Us</p>
+          <h2 class="section-title" style="font-size:1.75rem;margin-bottom:2rem;">We're easy to <em>get in touch
+              with</em></h2>
+          <div class="contact-info-item">
+            <div class="ci-icon">📞</div>
+            <div><strong style="font-size:.9rem;display:block;margin-bottom:.2rem;">Phone &amp; Text</strong><a
+                href="tel:5035550182" style="color:var(--amber);font-size:1.05rem;">(503) 555-0182</a>
+              <p style="font-size:.8rem;color:var(--ink-muted);">Mon–Sat 7am–7pm · Emergency line available</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon">✉️</div>
+            <div><strong style="font-size:.9rem;display:block;margin-bottom:.2rem;">Email</strong><a
+                href="mailto:hello@precisionpaintco.com" style="color:var(--amber);">hello@precisionpaintco.com</a>
+              <p style="font-size:.8rem;color:var(--ink-muted);">Replies within 2 hours</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon">📍</div>
+            <div><strong style="font-size:.9rem;display:block;margin-bottom:.2rem;">Location</strong>
+              <p>Portland, Oregon</p>
+              <p style="font-size:.8rem;color:var(--ink-muted);">Serving all Portland metro, Beaverton, Lake Oswego,
+                Tigard &amp; more</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="ci-icon">⏰</div>
+            <div><strong style="font-size:.9rem;display:block;margin-bottom:.2rem;">Hours</strong>
+              <p style="font-size:.85rem;color:var(--ink-muted);">Mon–Fri: 7:00 AM – 7:00 PM<br>Saturday: 8:00 AM – 5:00
+                PM<br>Sunday: Estimates only (by appointment)</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:.75rem;margin-top:2rem;flex-wrap:wrap;">
+            <a href="request-quote.html" class="btn btn-amber">Free Estimate</a>
+          </div>
+        </div>
+        <div class="reveal">
+          <div
+            style="background:var(--white);border:1px solid var(--border);border-radius:var(--r-xl);padding:2.5rem;box-shadow:var(--shadow-sm);">
+            <p class="overline" style="margin-bottom:1.5rem;">Send a Message</p>
+            <form data-submit style="display:flex;flex-direction:column;gap:1rem;">
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                <div class="field"><label class="label">First Name</label><input class="input" type="text"
+                    placeholder="John" /></div>
+                <div class="field"><label class="label">Last Name</label><input class="input" type="text"
+                    placeholder="Smith" /></div>
+              </div>
+              <div class="field"><label class="label">Email *</label><input class="input" type="email"
+                  placeholder="john@email.com" required /></div>
+              <div class="field"><label class="label">Phone</label><input class="input" type="tel"
+                  placeholder="(503) 555-0000" /></div>
+              <div class="field"><label class="label">Service Needed</label><select class="select">
+                  <option>Interior Painting</option>
+                  <option>Exterior Painting</option>
+                  <option>Cabinet Painting</option>
+                  <option>Commercial</option>
+                  <option>Deck &amp; Fence</option>
+                  <option>Other</option>
+                </select></div>
+              <div class="field"><label class="label">Message *</label><textarea class="textarea"
+                  placeholder="Tell us about your project..." required></textarea></div>
+
+              <button type="submit" class="btn btn-amber btn-lg" style="justify-content:center;margin-top:.5rem;">Send
+                Message →</button>
+              <p style="font-size:.75rem;color:var(--ink-faint);text-align:center;">We respond within 2 business hours,
+                7 days a week.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="logo-mark">P</div>Precision<span class="logo-accent">Paint</span>
+        </a>
+        <p class="footer-tagline">Portland's most trusted residential and commercial painting contractor since 2008.
+          Licensed, bonded, insured.</p>
+        <div class="footer-contact">
+          <a href="tel:5035550182">📞 (503) 555-0182</a>
+          <a href="mailto:hello@precisionpaintco.com">✉ hello@precisionpaintco.com</a>
+          <span>📍 Portland, OR · Serving Metro Area</span>
+        </div>
+        <div class="footer-badges">
+          <span class="footer-badge">Licensed #CCB-182744</span>
+          <span class="footer-badge">Fully Insured</span>
+          <span class="footer-badge">EPA RRP Certified</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="interior-painting.html">Interior Painting</a>
+        <a href="exterior-painting.html">Exterior Painting</a>
+        <a href="cabinet-painting.html">Cabinet Painting</a>
+        <a href="drywall-repair.html">Drywall Repair</a>
+        <a href="color-consultation.html">Color Consultation</a>
+        <a href="deck-fence-staining.html">Deck &amp; Fence Staining</a>
+        <a href="wallpaper-removal.html">Wallpaper Removal</a>
+        <a href="commercial-painting.html">Commercial</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="gallery.html">Portfolio</a>
+        <a href="testimonials.html">Reviews</a>
+        <a href="warranty.html">Our Warranty</a>
+        <a href="service-area.html">Service Area</a>
+        <a href="blog.html">Blog</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get Started</h4>
+        <a href="request-quote.html">Free Estimate</a>
+        <a href="booking.html">Book a Consult</a>
+        <a href="estimate-calculator.html">Cost Calculator</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="warranty.html">2-Year Warranty</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2024 Precision Painting Co. All rights reserved.</span>
+        <span>
+          <a href="privacy-policy.html">Privacy Policy</a> ·
+          <a href="terms.html">Terms of Service</a> ·
+          <a href="sitemap.html">Sitemap</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="shared.js"></script>
+
+</body>
+
+</html>

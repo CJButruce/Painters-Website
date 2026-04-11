@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Project Gallery | Precision Painting Co. — Portland, OR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      transition: transform var(--t), box-shadow var(--t);
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .project-card__img {
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .project-card__body {
+      padding: 1.25rem;
+    }
+
+    .project-card__tag {
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: .4rem;
+      display: block;
+    }
+
+    .project-card__title {
+      font-family: var(--font-disp);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: .4rem;
+    }
+
+    .project-card__meta {
+      font-size: .78rem;
+      color: var(--ink-faint);
+    }
+
+    @media(max-width:900px) {
+      .project-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media(max-width:540px) {
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <span>📞 <a href="tel:5035550182">(503) 555-0182</a></span>
+    <span class="top-bar__sep">|</span>
+    <span>Licensed &amp; Insured · Portland, OR</span>
+    <span class="top-bar__sep">|</span>
+    <a href="request-quote.html">Free Estimate →</a>
+  </div>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-logo">
+        <div class="logo-mark">P</div>Precision<span class="logo-accent">Paint</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <div class="nav-dropdown">
+          <a href="services.html">Services</a>
+          <div class="nav-dropdown__menu">
+            <a href="services.html#interior">Interior Painting</a><a href="services.html#exterior">Exterior Painting</a>
+            <a href="services.html#residential">Residential</a><a href="services.html#commercial">Commercial</a>
+            <a href="services.html#cabinet">Cabinet Painting</a><a href="services.html#color">Color Consultation</a>
+            <a href="services.html#drywall">Drywall Repair</a><a href="services.html#wallpaper">Wallpaper Removal</a>
+            <a href="services.html#deck">Deck &amp; Fence</a>
+          </div>
+        </div>
+        <a href="gallery.html">Gallery</a><a href="testimonials.html">Reviews</a>
+        <a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-end">
+        <a href="tel:5035550182" class="nav-phone">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.28 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          <span>(503) 555-0182</span>
+        </a>
+        <a href="request-quote.html" class="btn btn-amber btn-sm">Free Quote</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu__overlay"></div>
+    <div class="mobile-menu__panel">
+      <a href="index.html">Home</a><a href="services.html#interior">Interior Painting</a><a href="#exterior">Exterior
+        Painting</a>
+      <a href="services.html#residential">Residential</a><a href="services.html#commercial">Commercial</a><a
+        href="services.html#cabinet">Cabinets</a>
+      <a href="services.html#color">Color Consultation</a><a href="services.html#drywall">Drywall</a>
+      <a href="services.html#wallpaper">Wallpaper</a><a href="services.html#deck">Deck &amp; Fence</a>
+      <a href="gallery.html">Gallery</a><a href="testimonials.html">Reviews</a><a href="about.html">About</a>
+      <a href="request-quote.html" class="btn btn-amber" style="margin-top:1.25rem;text-align:center;">Free Estimate
+        →</a>
+    </div>
+  </div>
+
+  <section class="page-hero page-hero--sm">
+    <div class="page-hero__bg">
+      <div class="hero-stripes"></div>
+      <div class="hero-glow"></div>
+    </div>
+    <div class="container">
+      <nav class="breadcrumbs"><a href="index.html">Home</a><span class="breadcrumbs__sep">/</span><a
+          href="gallery.html">Gallery</a><span class="breadcrumbs__sep">/</span><span>Projects</span></nav>
+      <p class="overline animate-up">Project Portfolio</p>
+      <h1 class="display-title animate-up-1"
+        style="font-size:clamp(2.2rem,5vw,4rem);color:var(--white);max-width:680px;">Every project tells a story of
+        <em>craft</em>
+      </h1>
+
+
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="project-grid">
+        <div class="project-card reveal">
+          <div class="project-card__img ph ph-1" style="min-height:160px;"></div>
+          <div class="project-card__body"><span class="project-card__tag">Interior</span>
+            <h3 class="project-card__title">SW Portland Ranch — Full Repaint</h3>
+            <p class="project-card__meta">2,400 sqft · 3 colors · 5 days</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-card__img ph ph-2" style="min-height:160px;"></div>
+          <div class="project-card__body"><span class="project-card__tag">Exterior</span>
+            <h3 class="project-card__title">Lake Oswego Colonial</h3>
+            <p class="project-card__meta">Siding + trim + gutters · 8 days</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-card__img ph ph-3" style="min-height:160px;"></div>
+          <div class="project-card__body"><span class="project-card__tag">Cabinets</span>
+            <h3 class="project-card__title">SE Portland Kitchen</h3>
+            <p class="project-card__meta">52 doors · Off-white satin · 6 days</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-card__img ph ph-4" style="min-height:160px;"></div>
+          <div class="project-card__body"><span class="project-card__tag">Commercial</span>
+            <h3 class="project-card__title">Pearl District Tech Office</h3>
+            <p class="project-card__meta">12,000 sqft · After-hours crew</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-card__img ph ph-5" style="min-height:160px;"></div>
+          <div class="project-card__body"><span class="project-card__tag">Exterior</span>
+            <h3 class="project-card__title">Beaverton Tudor Revival</h3>
+            <p class="project-card__meta">Historic color scheme preserved</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-card__img ph ph-6" style="min-height:160px;"></div>
+          <div class="project-card__body"><span class="project-card__tag">Deck</span>
+            <h3 class="project-card__title">Cedar Deck — Sauvie Island</h3>
+            <p class="project-card__meta">Semi-transparent TWP stain</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-card__img ph ph-7" style="min-height:160px;"></div>
+          <div class="project-card__body"><span class="project-card__tag">Interior</span>
+            <h3 class="project-card__title">NE Victorian — Whole Home</h3>
+            <p class="project-card__meta">7 rooms · Custom color palette</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-card__img ph ph-8" style="min-height:160px;"></div>
+          <div class="project-card__body"><span class="project-card__tag">Cabinets</span>
+            <h3 class="project-card__title">Tigard Kitchen — Dark Navy</h3>
+            <p class="project-card__meta">Dovetail boxes · Full extension hardware</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-card__img ph ph-9" style="min-height:160px;"></div>
+          <div class="project-card__body"><span class="project-card__tag">Exterior</span>
+            <h3 class="project-card__title">Tualatin Farmhouse</h3>
+            <p class="project-card__meta">Board &amp; batten + metal roof trim</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-card__img ph ph-10" style="min-height:160px;"></div>
+          <div class="project-card__body"><span class="project-card__tag">Interior</span>
+            <h3 class="project-card__title">Hillsdale Craftsman Refresh</h3>
+            <p class="project-card__meta">Trim work + wainscoting detail</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-card__img ph ph-1" style="min-height:160px;"></div>
+          <div class="project-card__body"><span class="project-card__tag">Commercial</span>
+            <h3 class="project-card__title">Multnomah Village Retail Row</h3>
+            <p class="project-card__meta">5 storefronts · Coordinated scheme</p>
+          </div>
+        </div>
+        <div class="project-card reveal">
+          <div class="project-card__img ph ph-2" style="min-height:160px;"></div>
+          <div class="project-card__body"><span class="project-card__tag">Deck</span>
+            <h3 class="project-card__title">Lake Oswego Composite Deck</h3>
+            <p class="project-card__meta">Cabot solid stain · Railing detail</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section style="background:var(--navy);padding:4.5rem 0;position:relative;overflow:hidden;">
+    <div
+      style="position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent 0px,transparent 40px,rgba(255,255,255,.015) 40px,rgba(255,255,255,.015) 41px);pointer-events:none;">
+    </div>
+    <div
+      style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(232,168,50,.1) 0%,transparent 70%);top:-150px;right:-80px;pointer-events:none;">
+    </div>
+    <div class="container" style="text-align:center;position:relative;z-index:2;">
+      <p class="overline reveal" style="color:var(--amber);">Take the Next Step</p>
+      <h2 class="section-title section-title--white reveal" style="margin-bottom:1rem;">Ready for a transformation?</h2>
+      <p class="reveal" style="color:rgba(255,255,255,.55);max-width:500px;margin:0 auto 2.5rem;font-size:1rem;">Get
+        your free detailed estimate today. We respond within 2 hours.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;" class="reveal">
+        <a href="request-quote.html" class="btn btn-amber btn-xl">Get Free Estimate</a>
+        <a href="tel:5035550182" class="btn btn-outline-white btn-xl">📞 (503) 555-0182</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="logo-mark">P</div>Precision<span class="logo-accent">Paint</span>
+        </a>
+        <p class="footer-tagline">Portland's most trusted residential and commercial painting contractor since 2008.
+          Licensed, bonded, insured.</p>
+        <div class="footer-contact">
+          <a href="tel:5035550182">📞 (503) 555-0182</a>
+          <a href="mailto:hello@precisionpaintco.com">✉ hello@precisionpaintco.com</a>
+          <span>📍 Portland, OR · Serving Metro Area</span>
+        </div>
+        <div class="footer-badges">
+          <span class="footer-badge">Licensed #CCB-182744</span>
+          <span class="footer-badge">Fully Insured</span>
+          <span class="footer-badge">EPA RRP Certified</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="interior-painting.html">Interior Painting</a>
+        <a href="exterior-painting.html">Exterior Painting</a>
+        <a href="cabinet-painting.html">Cabinet Painting</a>
+        <a href="drywall-repair.html">Drywall Repair</a>
+        <a href="color-consultation.html">Color Consultation</a>
+        <a href="deck-fence-staining.html">Deck &amp; Fence Staining</a>
+        <a href="wallpaper-removal.html">Wallpaper Removal</a>
+        <a href="commercial-painting.html">Commercial</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="gallery.html">Portfolio</a>
+        <a href="testimonials.html">Reviews</a>
+        <a href="warranty.html">Our Warranty</a>
+        <a href="service-area.html">Service Area</a>
+        <a href="blog.html">Blog</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get Started</h4>
+        <a href="request-quote.html">Free Estimate</a>
+        <a href="booking.html">Book a Consult</a>
+        <a href="estimate-calculator.html">Cost Calculator</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="warranty.html">2-Year Warranty</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2024 Precision Painting Co. All rights reserved.</span>
+        <span>
+          <a href="privacy-policy.html">Privacy Policy</a> ·
+          <a href="terms.html">Terms of Service</a> ·
+          <a href="sitemap.html">Sitemap</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+  <script src="shared.js"></script>
+
+</body>
+
+</html>

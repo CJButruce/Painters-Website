@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>All Services | Precision Painting Co. — Portland, OR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .svc-tabs {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      gap: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 70px;
+      z-index: 100;
+    }
+
+    .svc-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .svc-tab {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .85rem 1.2rem;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      color: var(--ink-muted);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      transition: color .2s, border-color .2s, background .2s;
+      flex-shrink: 0;
+    }
+
+    .svc-tab:hover {
+      color: var(--ink);
+      background: var(--off-white);
+      text-decoration: none;
+    }
+
+    .svc-tab.active {
+      color: var(--navy);
+      border-bottom-color: var(--amber);
+      background: var(--off-white);
+    }
+
+    .svc-tab .ti {
+      font-size: 1rem;
+    }
+
+    .svc-block {
+      padding: 5.5rem 0;
+      border-bottom: 1px solid var(--border);
+      scroll-margin-top: 130px;
+    }
+
+    .svc-block:last-of-type {
+      border-bottom: none;
+    }
+
+    .svc-block--alt {
+      background: var(--paper);
+    }
+
+    .svc-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4.5rem;
+      align-items: start;
+    }
+
+    .svc-layout.rev {
+      direction: rtl;
+    }
+
+    .svc-layout.rev>* {
+      direction: ltr;
+    }
+
+    .svc-photo {
+      aspect-ratio: 4/3;
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .svc-badge {
+      position: absolute;
+      bottom: 1.25rem;
+      left: 1.25rem;
+      background: var(--amber);
+      color: var(--navy);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: .35rem .85rem;
+      border-radius: var(--r);
+      box-shadow: var(--shadow-amber);
+    }
+
+    .svc-title {
+      font-family: var(--font-disp);
+      font-size: clamp(1.75rem, 2.5vw, 2.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -.02em;
+      color: var(--ink);
+      margin-bottom: .75rem;
+    }
+
+    .svc-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--slate);
+    }
+
+    .svc-sub {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--ink-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .f2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .5rem 1.5rem;
+      margin: 1.25rem 0 1.5rem;
+    }
+
+    .f2 li {
+      display: flex;
+      align-items: flex-start;
+      gap: .5rem;
+      font-size: .87rem;
+      color: var(--ink-2);
+      line-height: 1.5;
+    }
+
+    .f2 li::before {
+      content: '✓';
+      color: var(--amber);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: .05rem;
+      font-size: .78rem;
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: .55rem;
+      margin: 1.5rem 0;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: .8rem;
+      padding: .8rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      border-left: 3px solid var(--amber);
+    }
+
+    .svc-block--alt .step {
+      background: var(--white);
+    }
+
+    .sn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--amber);
+      color: var(--navy);
+      font-size: .7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .step strong {
+      font-size: .84rem;
+      display: block;
+      margin-bottom: .1rem;
+    }
+
+    .step span {
+      font-size: .78rem;
+      color: var(--ink-muted);
+      line-height: 1.5;
+    }
+
+    .pricing {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: var(--navy);
+      color: var(--white);
+      border-radius: var(--r-lg);
+      padding: 1.25rem 1.5rem;
+      margin: 1.25rem 0;
+      flex-wrap: wrap;
+    }
+
+    .prange {
+      font-family: var(--font-disp);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+    }
+
+    .punit {
+      font-size: .73rem;
+      color: rgba(255, 255, 255, .4);
+      margin-top: .2rem;
+    }
+
+    .pnote {
+      font-size: .81rem;
+      color: rgba(255, 255, 255, .5);
+      flex: 1;
+      line-height: 1.55;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .trust-band {
+      background: var(--paper);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.1rem 0;
+    }
+
+    .trust-band .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .ti2 {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .8rem;
+      font-weight: 500;
+      color: var(--ink-muted);
+      white-space: nowrap;
+    }
+
+    .ti2 strong {
+      color: var(--ink);
+    }
+
+    .h-label {
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin: .5rem 0 .6rem;
+    }
+
+    @media(max-width:1024px) {
+      .svc-layout {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .svc-layout.rev {
+        direction: ltr;
+      }
+    }
+
+    @media(max-width:600px) {
+      .f2 {
+        grid-template-columns: 1fr;
+      }
+
+      .svc-block {
+        padding: 3.5rem 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-bar">
+    <span>📞 <a href="tel:5035550182">(503) 555-0182</a></span>
+    <span class="top-bar__sep">|</span>
+    <span>Licensed &amp; Insured · Portland, OR</span>
+    <span class="top-bar__sep">|</span>
+    <a href="request-quote.html">Free Estimate →</a>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-logo">
+        <div class="logo-mark">P</div>Precision<span class="logo-accent">Paint</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <div class="nav-dropdown">
+          <a href="services.html">Services</a>
+          <div class="nav-dropdown__menu">
+            <a href="#interior">Interior Painting</a><a href="#exterior">Exterior Painting</a>
+            <a href="#residential">Residential</a><a href="#commercial">Commercial</a>
+            <a href="#cabinet">Cabinet Painting</a><a href="#color">Color Consultation</a>
+            <a href="#drywall">Drywall Repair</a><a href="#wallpaper">Wallpaper Removal</a>
+            <a href="#deck">Deck &amp; Fence</a>
+          </div>
+        </div>
+        <a href="gallery.html">Gallery</a><a href="testimonials.html">Reviews</a>
+        <a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-end">
+        <a href="tel:5035550182" class="nav-phone">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.28 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          <span>(503) 555-0182</span>
+        </a>
+        <a href="request-quote.html" class="btn btn-amber btn-sm">Free Quote</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu__overlay"></div>
+    <div class="mobile-menu__panel">
+      <a href="index.html">Home</a><a href="#interior">Interior Painting</a><a href="#exterior">Exterior Painting</a>
+      <a href="#residential">Residential</a><a href="#commercial">Commercial</a><a href="#cabinet">Cabinets</a>
+      <a href="#color">Color Consultation</a><a href="#drywall">Drywall</a>
+      <a href="#wallpaper">Wallpaper</a><a href="#deck">Deck &amp; Fence</a>
+      <a href="gallery.html">Gallery</a><a href="testimonials.html">Reviews</a><a href="about.html">About</a>
+      <a href="request-quote.html" class="btn btn-amber" style="margin-top:1.25rem;text-align:center;">Free Estimate
+        →</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="page-hero page-hero--sm">
+    <div class="page-hero__bg">
+      <div class="hero-stripes"></div>
+      <div class="hero-glow"></div>
+    </div>
+    <div class="container">
+      <nav class="breadcrumbs"><a href="index.html">Home</a><span class="breadcrumbs__sep">/</span><span>Services</span>
+      </nav>
+      <p class="overline animate-up">What We Offer</p>
+      <h1 class="display-title animate-up-1"
+        style="font-size:clamp(2.5rem,5vw,4.25rem);color:var(--white);max-width:700px;">Complete painting services,
+        <em>one company</em>
+      </h1>
+      <p class="body-lg animate-up-2" style="max-width:560px;margin-top:1.25rem;color:rgba(255,255,255,.6);">Every
+        service below is delivered by our licensed, insured crew with a 2-year workmanship warranty and free detailed
+        estimates.</p>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;" class="animate-up-3">
+        <a href="request-quote.html" class="btn btn-amber btn-lg">Get Free Estimate</a>
+        <a href="estimate-calculator.html" class="btn btn-outline-white btn-lg">Cost Calculator</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TRUST BAR -->
+  <div class="trust-band">
+    <div class="container">
+      <div class="ti2">⭐ <strong>5.0</strong> Google (340+ reviews)</div>
+      <div class="ti2">🏅 Licensed &amp; Bonded</div>
+      <div class="ti2">🛡 2-Year Warranty</div>
+      <div class="ti2">✓ Free Detailed Estimates</div>
+      <div class="ti2">📅 Same-Week Scheduling</div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════════
+     01 — INTERIOR PAINTING
+══════════════════════════════════════════════════════ -->
+  <section class="svc-block" id="interior">
+    <div class="container">
+      <div class="svc-layout">
+        <div class="svc-photo ph ph-1 reveal"><span style="font-size:4rem;">🏠</span><span class="svc-badge">Most
+            Popular</span></div>
+        <div class="reveal">
+          <div class="tags">
+            <span class="tag tag--amber">Interior</span>
+            <span class="tag tag--navy">Residential &amp; Commercial</span>
+          </div>
+          <h2 class="svc-title">Interior Painting — <em>flawless finish,</em> every room</h2>
+          <p class="svc-sub">Our interior crews deliver dust-free, detail-obsessed paint jobs. From a single accent wall
+            to a whole-home repaint, we protect your home throughout and leave every room better than we found it.</p>
+          <div class="pricing">
+            <div>
+              <div class="prange">$1.40–$2.20</div>
+              <div class="punit">per sq ft</div>
+            </div>
+            <p class="pnote">Typical 2,000 sqft home: <strong style="color:var(--amber-lt);">$2,800–$4,400</strong>.
+              Includes prep, prime, and 2-coat application. Final price varies by condition and number of colors.</p>
+          </div>
+          <div class="h-label">What's Included</div>
+          <ul class="f2">
+            <li>Full furniture moving &amp; covering</li>
+            <li>Floor &amp; fixture protection throughout</li>
+            <li>Hole filling &amp; crack repair</li>
+            <li>Light sanding of all surfaces</li>
+            <li>Spot priming bare areas</li>
+            <li>Premium SW or BM paint — your choice</li>
+            <li>Walls, ceilings, doors &amp; trim</li>
+            <li>2 coats minimum on all surfaces</li>
+            <li>Low-VOC / odor-free options available</li>
+            <li>Daily site clean-up</li>
+            <li>Final walkthrough + touch-up included</li>
+            <li>2-year workmanship warranty</li>
+          </ul>
+          <div class="h-label">Our Process</div>
+          <div class="steps">
+            <div class="step"><span class="sn">1</span>
+              <div><strong>Free In-Home Estimate</strong><span>We visit, measure, and assess all surfaces. Written quote
+                  within 24 hours.</span></div>
+            </div>
+            <div class="step"><span class="sn">2</span>
+              <div><strong>Color Selection</strong><span>Our consultant helps you choose colors that work with your
+                  lighting and furnishings.</span></div>
+            </div>
+            <div class="step"><span class="sn">3</span>
+              <div><strong>Thorough Prep</strong><span>Furniture moved, floors covered, holes filled, surfaces sanded,
+                  bare areas primed.</span></div>
+            </div>
+            <div class="step"><span class="sn">4</span>
+              <div><strong>Expert Application</strong><span>Two coats minimum with proper dry time. Trim and edges cut
+                  in by hand.</span></div>
+            </div>
+            <div class="step"><span class="sn">5</span>
+              <div><strong>Walkthrough &amp; Sign-Off</strong><span>Every room walked with you. Not done until you're
+                  100% satisfied.</span></div>
+            </div>
+          </div>
+          <div class="cta-row">
+            <a href="request-quote.html" class="btn btn-amber btn-lg">Get Free Estimate</a>
+            <a href="booking.html" class="btn btn-outline">Book a Walkthrough</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+     02 — EXTERIOR PAINTING
+══════════════════════════════════════════════════════ -->
+  <section class="svc-block svc-block--alt" id="exterior">
+    <div class="container">
+      <div class="svc-layout rev">
+        <div class="svc-photo ph ph-7 reveal"><span style="font-size:4rem;">🏡</span><span
+            class="svc-badge">Weather-Ready</span></div>
+        <div class="reveal">
+          <div class="tags">
+            <span class="tag tag--amber">Exterior</span>
+            <span class="tag tag--navy">Residential &amp; Commercial</span>
+          </div>
+          <h2 class="svc-title">Exterior Painting — <em>built for</em> Portland weather</h2>
+          <p class="svc-sub">Our exterior process is engineered for Pacific Northwest conditions — power washing,
+            scraping, caulking, priming, and premium paint that handles our wet winters. Results last 8–12 years.</p>
+          <div class="pricing">
+            <div>
+              <div class="prange">$2.00–$3.20</div>
+              <div class="punit">per sq ft</div>
+            </div>
+            <p class="pnote">Typical 1,800 sqft exterior: <strong style="color:var(--amber-lt);">$3,600–$5,800</strong>.
+              Includes full prep, prime, caulk, and 2-coat application. Varies with siding type and condition.</p>
+          </div>
+          <div class="h-label">What's Included</div>
+          <ul class="f2">
+            <li>Commercial pressure washing (2,500+ PSI)</li>
+            <li>Hand-scraping all loose &amp; failing paint</li>
+            <li>Feathering &amp; sanding scraped edges</li>
+            <li>Spot priming bare wood &amp; metal</li>
+            <li>Elastomeric caulking at all joints</li>
+            <li>Siding, fascia, soffits &amp; gutters</li>
+            <li>Trim, window &amp; door frames</li>
+            <li>Premium exterior paint (10–15yr life)</li>
+            <li>2 coats body + 2 coats trim</li>
+            <li>Landscaping protection throughout</li>
+            <li>Wood rot identification &amp; repair</li>
+            <li>2-year workmanship warranty</li>
+          </ul>
+          <div class="h-label">Our Process</div>
+          <div class="steps">
+            <div class="step"><span class="sn">1</span>
+              <div><strong>Power Wash &amp; Assessment</strong><span>Full pressure wash + surface-by-surface inspection.
+                  Damage and wood rot flagged.</span></div>
+            </div>
+            <div class="step"><span class="sn">2</span>
+              <div><strong>Scrape &amp; Sand</strong><span>Every loose edge scraped, feathered, sanded smooth. The step
+                  most painters skip.</span></div>
+            </div>
+            <div class="step"><span class="sn">3</span>
+              <div><strong>Caulk All Joints</strong><span>Every gap, joint, and penetration sealed with elastomeric
+                  caulk to prevent water intrusion.</span></div>
+            </div>
+            <div class="step"><span class="sn">4</span>
+              <div><strong>Prime &amp; Apply</strong><span>Spot prime bare wood, then full 2-coat application of premium
+                  exterior paint.</span></div>
+            </div>
+            <div class="step"><span class="sn">5</span>
+              <div><strong>Ladder Inspection</strong><span>Final check of all trim, edges, and high areas before calling
+                  the job complete.</span></div>
+            </div>
+          </div>
+          <div class="notice notice--info" style="margin:.5rem 0 1.5rem;">
+            <span class="notice--icon">☁️</span>
+            <div><strong>Portland tip:</strong> We paint in overcast conditions — ideal for exterior work. Scheduling
+              May–September maximises dry time, but we work year-round on appropriate days.</div>
+          </div>
+          <div class="cta-row">
+            <a href="request-quote.html" class="btn btn-amber btn-lg">Get Free Estimate</a>
+            <a href="before-after.html" class="btn btn-outline">See Before &amp; After</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+     03 — RESIDENTIAL PAINTING
+══════════════════════════════════════════════════════ -->
+  <section class="svc-block" id="residential">
+    <div class="container">
+      <div class="svc-layout">
+        <div class="svc-photo ph ph-2 reveal"><span style="font-size:4rem;">🏘️</span><span class="svc-badge">Full-Home
+            Package</span></div>
+        <div class="reveal">
+          <div class="tags">
+            <span class="tag tag--amber">Residential</span>
+            <span class="tag tag--navy">Interior + Exterior</span>
+          </div>
+          <h2 class="svc-title">Residential Painting — <em>complete care</em> inside and out</h2>
+          <p class="svc-sub">Your home is your largest investment. Our residential package covers both interior and
+            exterior under one contract — one crew, one schedule, one point of contact. Bundle pricing saves up to 15%
+            vs. booking separately.</p>
+          <div class="pricing">
+            <div>
+              <div class="prange">$1.60–$2.60</div>
+              <div class="punit">per sqft (interior)</div>
+            </div>
+            <p class="pnote">Single-family homes, condos, townhouses. Combining interior &amp; exterior saves up to
+              <strong style="color:var(--amber-lt);">15%</strong>. New construction and renovation repaints welcome.
+            </p>
+          </div>
+          <div class="h-label">What's Included</div>
+          <ul class="f2">
+            <li>Complete interior repaint — all rooms</li>
+            <li>Full exterior incl. siding &amp; trim</li>
+            <li>Color consultation — inside &amp; out</li>
+            <li>Comprehensive surface prep — both phases</li>
+            <li>Drywall repair &amp; crack filling included</li>
+            <li>Premium paint all surfaces</li>
+            <li>Single contract &amp; project manager</li>
+            <li>Phased scheduling, min. disruption</li>
+            <li>New construction paint-outs</li>
+            <li>Renovation &amp; flip repaints</li>
+            <li>Pre-sale refresh packages</li>
+            <li>2-year workmanship warranty</li>
+          </ul>
+          <div class="h-label">Our Process</div>
+          <div class="steps">
+            <div class="step"><span class="sn">1</span>
+              <div><strong>Full-Home Walkthrough Estimate</strong><span>We assess every surface inside and out. Detailed
+                  written quote within 24 hours.</span></div>
+            </div>
+            <div class="step"><span class="sn">2</span>
+              <div><strong>Color Planning</strong><span>We develop a cohesive color scheme for the entire home — inside
+                  and out.</span></div>
+            </div>
+            <div class="step"><span class="sn">3</span>
+              <div><strong>Interior Phase</strong><span>Prep, prime, paint — every room in sequence. You stay home
+                  throughout.</span></div>
+            </div>
+            <div class="step"><span class="sn">4</span>
+              <div><strong>Exterior Phase</strong><span>Wash, scrape, caulk, prime, 2 coats. Weather-dependent
+                  scheduling.</span></div>
+            </div>
+            <div class="step"><span class="sn">5</span>
+              <div><strong>Final Sign-Off</strong><span>Full walkthrough inside and out. All touch-ups done before we
+                  invoice.</span></div>
+            </div>
+          </div>
+          <div class="cta-row">
+            <a href="request-quote.html" class="btn btn-amber btn-lg">Get Full-Home Quote</a>
+            <a href="gallery.html" class="btn btn-outline">View Portfolio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+     04 — COMMERCIAL PAINTING
+══════════════════════════════════════════════════════ -->
+  <section class="svc-block svc-block--alt" id="commercial">
+    <div class="container">
+      <div class="svc-layout rev">
+        <div class="svc-photo ph ph-4 reveal"><span style="font-size:4rem;">🏢</span><span class="svc-badge">Zero
+            Downtime</span></div>
+        <div class="reveal">
+          <div class="tags">
+            <span class="tag tag--amber">Commercial</span>
+            <span class="tag tag--navy">After-Hours Available</span>
+          </div>
+          <h2 class="svc-title">Commercial Painting — <em>professional results,</em> zero disruption</h2>
+          <p class="svc-sub">We schedule around you. After-hours and weekend crews, OSHA-trained staff, and dedicated
+            project managers keep your business open and productive. Offices, retail, warehouses, medical — we handle it
+            all.</p>
+          <div class="pricing">
+            <div>
+              <div class="prange">$1.80–$2.80</div>
+              <div class="punit">per sq ft</div>
+            </div>
+            <p class="pnote">Varies significantly by building type, accessibility, and scheduling requirements.
+              After-hours work carries a 20–30% premium. Contact us for a commercial consultation.</p>
+          </div>
+          <div class="h-label">What's Included</div>
+          <ul class="f2">
+            <li>Offices, corporate spaces &amp; retail</li>
+            <li>Warehouses &amp; industrial facilities</li>
+            <li>Medical &amp; healthcare offices</li>
+            <li>Multi-family buildings &amp; HOAs</li>
+            <li>After-hours &amp; weekend crews</li>
+            <li>Low-odor &amp; zero-VOC options</li>
+            <li>Dedicated project manager assigned</li>
+            <li>Phased painting by area or floor</li>
+            <li>OSHA-trained crew — safety plans</li>
+            <li>Brand &amp; franchise color matching</li>
+            <li>Certificate of insurance provided</li>
+            <li>Photographic documentation available</li>
+          </ul>
+          <div class="h-label">Our Process</div>
+          <div class="steps">
+            <div class="step"><span class="sn">1</span>
+              <div><strong>Site Survey &amp; Planning</strong><span>We survey the facility and build a disruption-free
+                  schedule around your operations.</span></div>
+            </div>
+            <div class="step"><span class="sn">2</span>
+              <div><strong>OSHA Safety Plan</strong><span>All crews OSHA-trained. Site-specific safety procedures
+                  developed before work begins.</span></div>
+            </div>
+            <div class="step"><span class="sn">3</span>
+              <div><strong>Phased Execution</strong><span>Work by area, floor, or after-hours to keep your business
+                  running.</span></div>
+            </div>
+            <div class="step"><span class="sn">4</span>
+              <div><strong>Daily Sign-Off</strong><span>Crew lead documents progress and signs off each phase before
+                  moving on.</span></div>
+            </div>
+            <div class="step"><span class="sn">5</span>
+              <div><strong>Punch List &amp; Handover</strong><span>Formal punch list, paint specs on file, warranty
+                  certificate issued.</span></div>
+            </div>
+          </div>
+          <div class="cta-row">
+            <a href="request-quote.html" class="btn btn-amber btn-lg">Request Commercial Quote</a>
+            <a href="contact.html" class="btn btn-outline">Talk to a Project Manager</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+     05 — CABINET PAINTING
+══════════════════════════════════════════════════════ -->
+  <section class="svc-block" id="cabinet">
+    <div class="container">
+      <div class="svc-layout">
+        <div class="svc-photo ph ph-5 reveal"><span style="font-size:4rem;">🗄️</span><span class="svc-badge">Factory
+            Finish</span></div>
+        <div class="reveal">
+          <div class="tags">
+            <span class="tag tag--amber">Cabinet Painting</span>
+            <span class="tag tag--navy">Kitchen &amp; Bath</span>
+          </div>
+          <h2 class="svc-title">Cabinet Painting — <em>factory-smooth</em> at a fraction of new</h2>
+          <p class="svc-sub">New cabinets cost $10,000–$30,000. Our shop-quality spray process produces a finish
+            genuinely indistinguishable from factory-painted cabinets — for a fraction of that cost. The highest
+            transformation-per-dollar in your home.</p>
+          <div class="pricing">
+            <div>
+              <div class="prange">$55–$95</div>
+              <div class="punit">per door/drawer front</div>
+            </div>
+            <p class="pnote">Typical kitchen (40 doors): <strong style="color:var(--amber-lt);">$2,200–$3,800</strong>.
+              Includes hardware removal/reinstall, box painting, and shop-spray process for all door fronts.</p>
+          </div>
+          <div class="h-label">What's Included</div>
+          <ul class="f2">
+            <li>All doors &amp; drawers labeled &amp; removed</li>
+            <li>Hardware removed, bagged &amp; reinstalled</li>
+            <li>Shop-spray application — dust-free</li>
+            <li>Thorough degreasing &amp; light sanding</li>
+            <li>High-adhesion primer on all surfaces</li>
+            <li>Alkyd enamel or conversion varnish topcoat</li>
+            <li>Cabinet boxes painted in place</li>
+            <li>Interior box painting — optional add-on</li>
+            <li>Any color in SW or BM library</li>
+            <li>Soft-close hardware upgrade available</li>
+            <li>Before &amp; after photography included</li>
+            <li>2-year finish warranty</li>
+          </ul>
+          <div class="h-label">Our Process</div>
+          <div class="steps">
+            <div class="step"><span class="sn">1</span>
+              <div><strong>Count &amp; Quote</strong><span>We count doors, assess current finish, and provide a
+                  door-by-door price.</span></div>
+            </div>
+            <div class="step"><span class="sn">2</span>
+              <div><strong>Demo Day</strong><span>Doors labeled and removed. Hardware bagged. Frames masked off.</span>
+              </div>
+            </div>
+            <div class="step"><span class="sn">3</span>
+              <div><strong>Shop Painting</strong><span>Doors sprayed in our controlled shop environment for dust-free
+                  results. 2–3 days to cure.</span></div>
+            </div>
+            <div class="step"><span class="sn">4</span>
+              <div><strong>Box Painting</strong><span>Cabinet boxes painted in place with spray and detail
+                  brushwork.</span></div>
+            </div>
+            <div class="step"><span class="sn">5</span>
+              <div><strong>Rehang &amp; Hardware</strong><span>Doors reinstalled, hardware back on, all doors adjusted
+                  for perfect alignment.</span></div>
+            </div>
+          </div>
+          <div class="cta-row">
+            <a href="request-quote.html" class="btn btn-amber btn-lg">Get Cabinet Quote</a>
+            <a href="before-after.html" class="btn btn-outline">See Transformations</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+     06 — COLOR CONSULTATION
+══════════════════════════════════════════════════════ -->
+  <section class="svc-block svc-block--alt" id="color">
+    <div class="container">
+      <div class="svc-layout rev">
+        <div class="svc-photo ph ph-3 reveal"><span style="font-size:4rem;">🎨</span><span class="svc-badge">Free with
+            Booking</span></div>
+        <div class="reveal">
+          <div class="tags">
+            <span class="tag tag--amber">Color Consultation</span>
+            <span class="tag tag--navy">Complimentary with Any Project</span>
+          </div>
+          <h2 class="svc-title">Color Consultation — <em>confidence</em> before the first drop</h2>
+          <p class="svc-sub">Color is the most impactful — and most feared — decision in any paint project. Our
+            certified color consultants use physical samples, digital visualization, and years of experience to help you
+            choose colors you'll love for years.</p>
+          <div class="pricing">
+            <div>
+              <div class="prange">Free</div>
+              <div class="punit">with any painting project</div>
+            </div>
+            <p class="pnote">Standalone consultation: <strong style="color:var(--amber-lt);">$150/hr</strong> (min. 1
+              hour). Includes physical swatches, large peel-and-stick samples, and digital visualization on your home
+              photos.</p>
+          </div>
+          <div class="h-label">What's Included</div>
+          <ul class="f2">
+            <li>In-home or virtual consultation</li>
+            <li>Lighting &amp; furnishing assessment</li>
+            <li>3–5 curated color palette proposals</li>
+            <li>Physical swatch samples provided</li>
+            <li>Large peel-and-stick wall samples</li>
+            <li>Digital visualization on your photos</li>
+            <li>Exterior color scheme coordination</li>
+            <li>Interior room-to-room flow planning</li>
+            <li>SW &amp; BM full color expertise</li>
+            <li>Trim &amp; accent color pairing</li>
+            <li>Historical color matching</li>
+            <li>Resale value color guidance</li>
+          </ul>
+          <div class="h-label">Our Process</div>
+          <div class="steps">
+            <div class="step"><span class="sn">1</span>
+              <div><strong>Book Consultation</strong><span>45–60 min session scheduled within the week. In-home or
+                  virtual.</span></div>
+            </div>
+            <div class="step"><span class="sn">2</span>
+              <div><strong>Needs Assessment</strong><span>We discuss your style goals, lighting, furnishings,
+                  architecture, and neighborhood context.</span></div>
+            </div>
+            <div class="step"><span class="sn">3</span>
+              <div><strong>Palette Presentation</strong><span>3–5 curated options presented with rationale for
+                  each.</span></div>
+            </div>
+            <div class="step"><span class="sn">4</span>
+              <div><strong>Large Samples</strong><span>Peel-and-stick samples applied to actual walls so you see true
+                  color in your light.</span></div>
+            </div>
+            <div class="step"><span class="sn">5</span>
+              <div><strong>Final Selections</strong><span>Colors locked in before any prep begins. Full confidence
+                  before the first coat.</span></div>
+            </div>
+          </div>
+          <div class="cta-row">
+            <a href="booking.html" class="btn btn-amber btn-lg">Book a Consultation</a>
+            <a href="request-quote.html" class="btn btn-outline">Get Full Project Quote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+     07 — DRYWALL REPAIR
+══════════════════════════════════════════════════════ -->
+  <section class="svc-block" id="drywall">
+    <div class="container">
+      <div class="svc-layout">
+        <div class="svc-photo ph ph-8 reveal"><span style="font-size:4rem;">🔧</span><span class="svc-badge">Seamless
+            Results</span></div>
+        <div class="reveal">
+          <div class="tags">
+            <span class="tag tag--amber">Drywall Repair</span>
+            <span class="tag tag--navy">Minor Repairs Included Free</span>
+          </div>
+          <h2 class="svc-title">Drywall Repair — <em>seamless surface,</em> perfect foundation</h2>
+          <p class="svc-sub">Painting over damaged walls shows every flaw — no matter how good the paint. We fix the
+            surface first: holes, cracks, water damage, and texture matching — so the paint looks exactly as it should.
+          </p>
+          <div class="pricing">
+            <div>
+              <div class="prange">$4.50–$9.00</div>
+              <div class="punit">per sq ft repaired</div>
+            </div>
+            <p class="pnote">Nail holes &amp; minor cracks are always included in our painting projects at no extra
+              charge. Large patches, water damage, and skim-coat work are priced per sq ft affected.</p>
+          </div>
+          <div class="h-label">What's Included</div>
+          <ul class="f2">
+            <li>Nail holes &amp; screw pops — included</li>
+            <li>Small &amp; medium hole patching</li>
+            <li>Large hole repair with backing board</li>
+            <li>Water stain sealing (shellac primer)</li>
+            <li>Hairline crack repair &amp; reinforcement</li>
+            <li>Corner bead replacement</li>
+            <li>Texture matching — all types</li>
+            <li>Orange peel &amp; skip-trowel match</li>
+            <li>Knockdown &amp; popcorn match</li>
+            <li>Full skim coat for smooth walls</li>
+            <li>Priming all repaired areas</li>
+            <li>Ready for flawless topcoat</li>
+          </ul>
+          <div class="h-label">Our Process</div>
+          <div class="steps">
+            <div class="step"><span class="sn">1</span>
+              <div><strong>Assessment &amp; Documentation</strong><span>All damage photographed and noted. Severity
+                  determines repair approach.</span></div>
+            </div>
+            <div class="step"><span class="sn">2</span>
+              <div><strong>Structural Repair</strong><span>Backing boards, mesh tape, and joint compound for holes and
+                  cracks.</span></div>
+            </div>
+            <div class="step"><span class="sn">3</span>
+              <div><strong>Multiple Compound Coats</strong><span>Thin coats applied and sanded between each until level
+                  and smooth.</span></div>
+            </div>
+            <div class="step"><span class="sn">4</span>
+              <div><strong>Texture Matching</strong><span>We match the existing texture precisely so repairs are
+                  invisible after painting.</span></div>
+            </div>
+            <div class="step"><span class="sn">5</span>
+              <div><strong>Prime &amp; Ready</strong><span>All repaired areas primed with high-hide primer. Ready for
+                  perfect topcoat.</span></div>
+            </div>
+          </div>
+          <div class="cta-row">
+            <a href="request-quote.html" class="btn btn-amber btn-lg">Get Repair Quote</a>
+            <a href="contact.html" class="btn btn-outline">Send Photos for Assessment</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+     09 — WALLPAPER REMOVAL
+══════════════════════════════════════════════════════ -->
+  <section class="svc-block svc-block--alt" id="wallpaper">
+    <div class="container">
+      <div class="svc-layout rev">
+        <div class="svc-photo ph ph-9 reveal"><span style="font-size:4rem;">📄</span><span
+            class="svc-badge">Damage-Free</span></div>
+        <div class="reveal">
+          <div class="tags">
+            <span class="tag tag--amber">Wallpaper Removal</span>
+            <span class="tag tag--navy">All Types</span>
+          </div>
+          <h2 class="svc-title">Wallpaper Removal — <em>clean walls,</em> zero damage</h2>
+          <p class="svc-sub">DIY wallpaper removal routinely destroys drywall paper — leaving walls that require
+            expensive skim-coating before painting. Our systematic, patient process leaves walls smooth, clean, and
+            ready for a perfect result.</p>
+          <div class="pricing">
+            <div>
+              <div class="prange">$1.50–$4.00</div>
+              <div class="punit">per sq ft</div>
+            </div>
+            <p class="pnote">Standard vinyl-coated at the low end; fabric-backed, grasscloth, and multi-layer at the
+              high end. Complete glue removal and minor wall repair included in all wallpaper jobs.</p>
+          </div>
+          <div class="h-label">What's Included</div>
+          <ul class="f2">
+            <li>Vinyl-coated &amp; standard removal</li>
+            <li>Fabric-backed &amp; grasscloth removal</li>
+            <li>Multi-layer &amp; old paste types</li>
+            <li>Professional scoring (not razor)</li>
+            <li>Steam or chemical release agents</li>
+            <li>Section-by-section careful removal</li>
+            <li>Complete adhesive residue removal</li>
+            <li>Wall wash-down after removal</li>
+            <li>Minor wall repair included</li>
+            <li>Skim coat if needed (add-on)</li>
+            <li>Shellac-sealing of wall surfaces</li>
+            <li>Primed &amp; ready to paint</li>
+          </ul>
+          <div class="h-label">Our Process</div>
+          <div class="steps">
+            <div class="step"><span class="sn">1</span>
+              <div><strong>Test &amp; Identify</strong><span>We identify wallpaper type and test-peel in a hidden area
+                  to assess difficulty.</span></div>
+            </div>
+            <div class="step"><span class="sn">2</span>
+              <div><strong>Score</strong><span>Perforated scoring tool allows moisture to penetrate without damaging
+                  drywall.</span></div>
+            </div>
+            <div class="step"><span class="sn">3</span>
+              <div><strong>Wet &amp; Remove</strong><span>Steam or chemical solution applied in sections. Patient,
+                  controlled removal.</span></div>
+            </div>
+            <div class="step"><span class="sn">4</span>
+              <div><strong>Glue Removal</strong><span>All adhesive residue removed. Walls thoroughly washed down.</span>
+              </div>
+            </div>
+            <div class="step"><span class="sn">5</span>
+              <div><strong>Repair &amp; Seal</strong><span>Damaged areas repaired, walls shellac-sealed, primed, ready
+                  for paint.</span></div>
+            </div>
+          </div>
+          <div class="notice notice--info" style="margin:.5rem 0 1.5rem;">
+            <span class="notice--icon">⚠️</span>
+            <div><strong>Important:</strong> We strongly advise against painting over wallpaper. Seams telegraph through
+              paint, edges lift, and moisture causes bubbling. Proper removal always looks better long-term.</div>
+          </div>
+          <div class="cta-row">
+            <a href="request-quote.html" class="btn btn-amber btn-lg">Get Removal Quote</a>
+            <a href="contact.html" class="btn btn-outline">Send Photos to Assess</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════════
+     10 — DECK & FENCE STAINING
+══════════════════════════════════════════════════════ -->
+  <section class="svc-block" id="deck">
+    <div class="container">
+      <div class="svc-layout">
+        <div class="svc-photo ph ph-2 reveal"><span style="font-size:4rem;">🌲</span><span class="svc-badge">Weather
+            Protected</span></div>
+        <div class="reveal">
+          <div class="tags">
+            <span class="tag tag--amber">Deck &amp; Fence Staining</span>
+            <span class="tag tag--navy">Exterior Wood Care</span>
+          </div>
+          <h2 class="svc-title">Deck &amp; Fence Staining — <em>protected beauty</em> through Portland winters</h2>
+          <p class="svc-sub">Outdoor wood exposed to Portland's rain and UV needs the right prep and the right product.
+            We pressure-wash, brighten, sand, and apply premium penetrating stains by brush — not roller — for maximum
+            wood penetration and years of lasting protection.</p>
+          <div class="pricing">
+            <div>
+              <div class="prange">$1.50–$2.80</div>
+              <div class="punit">per sq ft</div>
+            </div>
+            <p class="pnote">Typical 600 sqft deck: <strong style="color:var(--amber-lt);">$900–$1,680</strong>.
+              Includes pressure wash, wood brightener, sanding, and 1–2 coats of premium penetrating stain applied by
+              brush.</p>
+          </div>
+          <div class="h-label">What's Included</div>
+          <ul class="f2">
+            <li>Commercial pressure washing</li>
+            <li>Wood brightener (oxalic acid) application</li>
+            <li>Sanding rough boards &amp; splinters</li>
+            <li>Setting all nail heads &amp; screws</li>
+            <li>Deck boards, rails &amp; posts</li>
+            <li>Fences, gates &amp; lattice</li>
+            <li>Pergolas &amp; outdoor structures</li>
+            <li>Brush application — max penetration</li>
+            <li>Cabot, TWP, or Armstrong Clark stain</li>
+            <li>Semi-transparent or solid stain options</li>
+            <li>Board replacement identification</li>
+            <li>Full cure inspection before handover</li>
+          </ul>
+          <div class="h-label">Our Process</div>
+          <div class="steps">
+            <div class="step"><span class="sn">1</span>
+              <div><strong>Pressure Wash</strong><span>Full commercial wash strips dirt, mould, and grey oxidation from
+                  all surfaces.</span></div>
+            </div>
+            <div class="step"><span class="sn">2</span>
+              <div><strong>Wood Brightening</strong><span>Oxalic acid brightener restores natural wood color and opens
+                  grain for stain absorption.</span></div>
+            </div>
+            <div class="step"><span class="sn">3</span>
+              <div><strong>Sand &amp; Repair</strong><span>Rough boards sanded, nail heads set, damaged boards
+                  flagged.</span></div>
+            </div>
+            <div class="step"><span class="sn">4</span>
+              <div><strong>Brush Application</strong><span>Premium penetrating stain applied by brush, end-grain first.
+                  Maximum penetration.</span></div>
+            </div>
+            <div class="step"><span class="sn">5</span>
+              <div><strong>Cure &amp; Inspect</strong><span>Returned after full cure to touch up any absorbed or missed
+                  areas.</span></div>
+            </div>
+          </div>
+          <div class="notice notice--info" style="margin:.5rem 0 1.5rem;">
+            <span class="notice--icon">🕐</span>
+            <div><strong>Maintenance tip:</strong> A properly stained deck typically needs re-application every 2–4
+              years depending on sun and rain exposure. We offer annual inspection visits.</div>
+          </div>
+          <div class="cta-row">
+            <a href="request-quote.html" class="btn btn-amber btn-lg">Get Deck/Fence Quote</a>
+            <a href="gallery.html" class="btn btn-outline">See Project Gallery</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- BOTTOM CTA -->
+  <section style="background:var(--navy);padding:4.5rem 0;position:relative;overflow:hidden;">
+    <div
+      style="position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent 0px,transparent 40px,rgba(255,255,255,.015) 40px,rgba(255,255,255,.015) 41px);pointer-events:none;">
+    </div>
+    <div
+      style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(232,168,50,.1) 0%,transparent 70%);top:-150px;right:-80px;pointer-events:none;">
+    </div>
+    <div class="container" style="text-align:center;position:relative;z-index:2;">
+      <p class="overline reveal" style="color:var(--amber);">Ready to Begin?</p>
+      <h2 class="section-title section-title--white reveal" style="margin-bottom:1rem;">Get your free estimate today
+      </h2>
+      <p class="reveal" style="color:rgba(255,255,255,.5);max-width:500px;margin:0 auto 2.5rem;">We respond within 2
+        hours, provide detailed written quotes within 24 hours, and offer same-week scheduling on most projects.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;" class="reveal">
+        <a href="request-quote.html" class="btn btn-amber btn-xl">Get Free Estimate →</a>
+        <a href="tel:5035550182" class="btn btn-outline-white btn-xl">📞 (503) 555-0182</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="logo-mark">P</div>Precision<span class="logo-accent">Paint</span>
+        </a>
+        <p class="footer-tagline">Portland's most trusted residential and commercial painting contractor since 2008.
+          Licensed, bonded, insured.</p>
+        <div class="footer-contact">
+          <a href="tel:5035550182">📞 (503) 555-0182</a>
+          <a href="/cdn-cgi/l/email-protection#375f525b5b5877474552545e445e585947565e594354581954585a">✉ <span
+              class="__cf_email__"
+              data-cfemail="0f676a6363604f7f7d6a6c667c6660617f6e66617b6c60216c6062">[email&#160;protected]</span></a>
+          <span>📍 Portland, OR · Serving Metro Area</span>
+        </div>
+        <div class="footer-badges">
+          <span class="footer-badge">Licensed #CCB-182744</span>
+          <span class="footer-badge">Fully Insured</span>
+          <span class="footer-badge">EPA RRP Certified</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#interior">Interior Painting</a><a href="#exterior">Exterior Painting</a>
+        <a href="#cabinet">Cabinet Painting</a><a href="#drywall">Drywall Repair</a>
+        <a href="#color">Color Consultation</a><a href="#deck">Deck &amp; Fence</a>
+        <a href="#wallpaper">Wallpaper Removal</a><a href="#commercial">Commercial</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a><a href="gallery.html">Portfolio</a>
+        <a href="testimonials.html">Reviews</a><a href="warranty.html">Warranty</a>
+        <a href="service-area.html">Service Area</a><a href="blog.html">Blog</a><a href="faq.html">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get Started</h4>
+        <a href="request-quote.html">Free Estimate</a><a href="booking.html">Book a Consult</a>
+        <a href="estimate-calculator.html">Cost Calculator</a><a href="contact.html">Contact Us</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2024 Precision Painting Co. All rights reserved.</span>
+        <span><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms.html">Terms of Service</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script src="shared.js"></script>
+  <script>
+    'use strict';
+    (function () {
+      const tabs = document.querySelectorAll('.svc-tab');
+      const sections = document.querySelectorAll('.svc-block[id]');
+      if (!tabs.length || !sections.length) return;
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            tabs.forEach(t => t.classList.remove('active'));
+            const m = document.querySelector(`.svc-tab[href="#${e.target.id}"]`);
+            if (m) { m.classList.add('active'); }
+          }
+        });
+      }, { rootMargin: '-20% 0px -60% 0px' });
+      sections.forEach(s => obs.observe(s));
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Paint Cost Calculator | Precision Painting Co. — Portland, OR</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="shared.css" />
+  <style>
+    .calc-wrap {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .calc-panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .calc-panel__head {
+      background: var(--navy);
+      padding: 1.75rem 2rem;
+    }
+
+    .calc-panel__body {
+      padding: 2rem;
+    }
+
+    .svc-picker {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .65rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .svc-chip {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .75rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      background: var(--off-white);
+      cursor: pointer;
+      transition: border-color .2s, background .2s, box-shadow .2s;
+      user-select: none;
+      position: relative;
+    }
+
+    .svc-chip:hover {
+      border-color: var(--amber);
+      background: var(--white);
+    }
+
+    .svc-chip.active {
+      border-color: var(--amber);
+      background: #fffbf0;
+      box-shadow: 0 0 0 3px rgba(232, 168, 50, .14);
+    }
+
+    .svc-chip__icon {
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+
+    .svc-chip__name {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--ink-muted);
+      line-height: 1.3;
+    }
+
+    .svc-chip.active .svc-chip__name {
+      color: var(--ink);
+    }
+
+    .svc-chip__check {
+      position: absolute;
+      top: .35rem;
+      right: .45rem;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--amber);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: .55rem;
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    .svc-chip.active .svc-chip__check {
+      display: flex;
+    }
+
+    .selected-list {
+      display: flex;
+      flex-direction: column;
+      gap: .85rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .selected-item {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 1.1rem 1.25rem;
+      animation: slide-in .22s ease both;
+    }
+
+    @keyframes slide-in {
+      from {
+        opacity: 0;
+        transform: translateY(-8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .selected-item__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: .9rem;
+    }
+
+    .selected-item__title {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .selected-item__remove {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: none;
+      border: 1.5px solid var(--border-2);
+      color: var(--ink-muted);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .18s, border-color .18s, color .18s;
+      flex-shrink: 0;
+    }
+
+    .selected-item__remove:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+
+    .selected-item__inputs {
+      display: grid;
+      gap: .75rem;
+    }
+
+    .selected-item__inputs .input,
+    .selected-item__inputs .select {
+      height: 40px;
+      font-size: .82rem;
+      padding: 0 .75rem;
+    }
+
+    .selected-item__inputs .select {
+      padding-right: 2rem;
+    }
+
+    .global-condition {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 1.25rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .calc-empty {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--ink-faint);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .calc-empty__icon {
+      font-size: 2.5rem;
+      opacity: .4;
+    }
+
+    /* result panel */
+    .result-panel {
+      position: sticky;
+      top: 5.5rem;
+      background: var(--navy);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .result-panel__head {
+      background: var(--amber);
+      padding: 1.5rem 2rem;
+    }
+
+    .result-panel__body {
+      padding: 2rem;
+    }
+
+    .result-total {
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .result-total__low {
+      font-family: var(--font-disp);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--amber);
+      line-height: 1;
+    }
+
+    .result-total__high {
+      font-size: 1.4rem;
+      font-family: var(--font-disp);
+      font-weight: 600;
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .result-svc-row {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+      padding: .85rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .07);
+    }
+
+    .result-svc-row:last-child {
+      border-bottom: none;
+    }
+
+    .result-svc-row__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .result-svc-name {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .84rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .85);
+    }
+
+    .result-svc-range {
+      font-family: var(--font-disp);
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--amber);
+      white-space: nowrap;
+    }
+
+    .result-svc-meta {
+      display: flex;
+      gap: .85rem;
+      flex-wrap: wrap;
+    }
+
+    .result-svc-meta span {
+      font-size: .7rem;
+      color: rgba(255, 255, 255, .3);
+    }
+
+    .result-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .6rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .result-split-item {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: var(--r-md);
+      padding: .85rem 1rem;
+    }
+
+    .result-split-item__label {
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .3);
+      margin-bottom: .3rem;
+    }
+
+    .result-split-item__val {
+      font-family: var(--font-disp);
+      font-size: .9rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, .75);
+    }
+
+    .result-bar {
+      margin-bottom: 1.5rem;
+    }
+
+    .result-bar__label {
+      display: flex;
+      justify-content: space-between;
+      font-size: .68rem;
+      color: rgba(255, 255, 255, .3);
+      margin-bottom: .4rem;
+    }
+
+    .result-bar__track {
+      height: 6px;
+      background: rgba(255, 255, 255, .08);
+      border-radius: 999px;
+      overflow: hidden;
+      display: flex;
+      gap: 2px;
+    }
+
+    .result-bar__seg {
+      height: 100%;
+      border-radius: 999px;
+    }
+
+    .seg--labor {
+      background: var(--amber);
+    }
+
+    .seg--material {
+      background: rgba(232, 168, 50, .4);
+    }
+
+    .result-note {
+      background: rgba(232, 168, 50, .06);
+      border: 1px solid rgba(232, 168, 50, .15);
+      border-radius: var(--r-md);
+      padding: .85rem 1rem;
+      font-size: .78rem;
+      color: rgba(255, 255, 255, .45);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .result-empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: rgba(255, 255, 255, .25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .result-empty__icon {
+      font-size: 2.5rem;
+      opacity: .3;
+    }
+
+    .result-empty__text {
+      font-size: .84rem;
+      line-height: 1.6;
+      max-width: 240px;
+    }
+
+    @media(max-width:1100px) {
+      .calc-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .result-panel {
+        position: static;
+      }
+
+      .svc-picker {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media(max-width:640px) {
+      .svc-picker {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="top-bar">
+    <span>📞 <a href="tel:5035550182">(503) 555-0182</a></span>
+    <span class="top-bar__sep">|</span>
+    <span>Licensed &amp; Insured · Portland, OR</span>
+    <span class="top-bar__sep">|</span>
+    <a href="request-quote.html">Free Estimate →</a>
+  </div>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="site-logo">
+        <div class="logo-mark">P</div>Precision<span class="logo-accent">Paint</span>
+      </a>
+      <nav class="site-nav">
+        <a href="index.html">Home</a>
+        <div class="nav-dropdown">
+          <a href="services.html">Services</a>
+          <div class="nav-dropdown__menu">
+            <a href="services.html#interior">Interior Painting</a><a href="services.html#exterior">Exterior Painting</a>
+            <a href="services.html#residential">Residential</a><a href="services.html#commercial">Commercial</a>
+            <a href="services.html#cabinet">Cabinet Painting</a><a href="services.html#color">Color Consultation</a>
+            <a href="services.html#drywall">Drywall Repair</a><a href="services.html#wallpaper">Wallpaper Removal</a>
+            <a href="services.html#deck">Deck &amp; Fence</a>
+          </div>
+        </div>
+        <a href="gallery.html">Gallery</a><a href="testimonials.html">Reviews</a>
+        <a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+      </nav>
+      <div class="nav-end">
+        <a href="tel:5035550182" class="nav-phone">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.28 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+          <span>(503) 555-0182</span>
+        </a>
+        <a href="request-quote.html" class="btn btn-amber btn-sm">Free Quote</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu__overlay"></div>
+    <div class="mobile-menu__panel">
+      <a href="index.html">Home</a><a href="services.html#interior">Interior Painting</a><a href="#exterior">Exterior
+        Painting</a>
+      <a href="services.html#residential">Residential</a><a href="services.html#commercial">Commercial</a><a
+        href="services.html#cabinet">Cabinets</a>
+      <a href="services.html#color">Color Consultation</a><a href="services.html#drywall">Drywall</a>
+      <a href="services.html#wallpaper">Wallpaper</a><a href="services.html#deck">Deck &amp; Fence</a>
+      <a href="gallery.html">Gallery</a><a href="testimonials.html">Reviews</a><a href="about.html">About</a>
+      <a href="request-quote.html" class="btn btn-amber" style="margin-top:1.25rem;text-align:center;">Free Estimate
+        →</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="page-hero page-hero--sm">
+    <div class="page-hero__bg">
+      <div class="hero-stripes"></div>
+      <div class="hero-glow"></div>
+    </div>
+    <div class="container">
+      <nav class="breadcrumbs">
+        <a href="index.html">Home</a><span class="breadcrumbs__sep">/</span>
+        <a href="contact.html">Contact</a><span class="breadcrumbs__sep">/</span>
+        <span>Cost Calculator</span>
+      </nav>
+      <p class="overline animate-up">Project Cost Calculator</p>
+      <h1 class="display-title animate-up-1"
+        style="font-size:clamp(2.2rem,4.5vw,3.75rem);color:var(--white);max-width:700px;">
+        Build your quote — <em>service by service</em>
+      </h1>
+      <p class="body-lg animate-up-2" style="max-width:580px;margin-top:1.25rem;color:rgba(255,255,255,.6);">
+        Select one or more services, enter square footage and color count for each, and get an instant ballpark estimate
+        with a full breakdown.
+      </p>
+    </div>
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="section">
+    <div class="container">
+      <div class="calc-wrap">
+
+        <!-- ───── LEFT PANEL ───── -->
+        <div class="calc-panel">
+          <div class="calc-panel__head">
+            <p class="overline" style="color:var(--amber);margin-bottom:.4rem;">Step 1</p>
+            <h2 style="font-family:var(--font-disp);font-size:1.3rem;font-weight:700;color:var(--white);">Select your
+              services</h2>
+            <p style="font-size:.8rem;color:rgba(255,255,255,.4);margin-top:.3rem;">Click to add. Click again to remove.
+            </p>
+          </div>
+          <div class="calc-panel__body">
+
+            <!-- chips -->
+            <div class="svc-picker" id="svcPicker"></div>
+
+            <!-- empty hint -->
+            <div class="calc-empty" id="emptyState">
+              <div class="calc-empty__icon">🖌️</div>
+              <p style="font-size:.85rem;line-height:1.6;max-width:280px;">Select at least one service above to start
+                building your estimate.</p>
+            </div>
+
+            <!-- selected services section -->
+            <div id="selectedSection" style="display:none;">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+                <p class="overline" style="margin-bottom:0;">Step 2 — Configure each service</p>
+                <span id="selectedCount"
+                  style="font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--amber);background:var(--amber-dim);border:1px solid rgba(232,168,50,.25);padding:.2rem .65rem;border-radius:999px;"></span>
+              </div>
+              <div class="selected-list" id="selectedList"></div>
+
+              <!-- global condition -->
+              <div class="global-condition">
+                <p
+                  style="font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:.65rem;">
+                  Overall Surface Condition</p>
+                <select class="select" id="globalCondition" style="font-size:.85rem;" onchange="recalculate()">
+                  <option value="1.0">Good — minimal prep needed</option>
+                  <option value="1.3" selected>Fair — moderate prep &amp; spot repairs</option>
+                  <option value="1.7">Poor — heavy prep, major repairs needed</option>
+                </select>
+                <p class="hint" style="margin-top:.5rem;">Applies to all services. Adjust as needed.</p>
+              </div>
+
+              <button class="btn btn-amber btn-lg" id="calcBtn" style="width:100%;justify-content:center;">
+                Calculate Total Estimate →
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ───── RIGHT PANEL (RESULTS) ───── -->
+        <div class="result-panel">
+          <div class="result-panel__head">
+            <h2 style="font-family:var(--font-disp);font-size:1.25rem;font-weight:700;color:var(--navy);">Your Project
+              Estimate</h2>
+            <p style="font-size:.78rem;color:rgba(15,30,46,.6);margin-top:.2rem;">Ballpark range · Portland metro
+              pricing</p>
+          </div>
+          <div class="result-panel__body">
+
+            <!-- empty -->
+            <div class="result-empty" id="resultEmpty">
+              <div class="result-empty__icon">🏠</div>
+              <p class="result-empty__text">Select services and click Calculate to see your estimate here.</p>
+            </div>
+
+            <!-- results -->
+            <div id="resultContent" style="display:none;">
+
+              <div class="result-total">
+                <p
+                  style="font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.5rem;">
+                  Total Project Range</p>
+                <div style="display:flex;align-items:baseline;gap:.65rem;flex-wrap:wrap;">
+                  <span class="result-total__low" id="rTotalLow">—</span>
+                  <span style="font-size:.85rem;color:rgba(255,255,255,.3);">to</span>
+                  <span class="result-total__high" id="rTotalHigh">—</span>
+                </div>
+              </div>
+
+              <!-- per-service rows -->
+              <div id="rServiceList" style="margin-bottom:1.5rem;"></div>
+
+              <!-- labor / materials split -->
+              <div class="result-split">
+                <div class="result-split-item">
+                  <div class="result-split-item__label">Labor ~65%</div>
+                  <div class="result-split-item__val" id="rLabor">—</div>
+                </div>
+                <div class="result-split-item">
+                  <div class="result-split-item__label">Materials ~35%</div>
+                  <div class="result-split-item__val" id="rMaterials">—</div>
+                </div>
+              </div>
+
+              <!-- visual bar -->
+              <div class="result-bar">
+                <div class="result-bar__label">
+                  <span>Cost Split</span>
+                  <span>Labor 65% · Materials 35%</span>
+                </div>
+                <div class="result-bar__track">
+                  <div class="result-bar__seg seg--labor" style="width:65%"></div>
+                  <div class="result-bar__seg seg--material" style="width:35%"></div>
+                </div>
+              </div>
+
+              <div class="result-note">
+                ⚠ Ballpark only. Final price depends on site conditions, paint selection, accessibility, and detailed
+                measurements. Free in-home estimates are always exact.
+              </div>
+
+              <a href="request-quote.html" class="btn btn-amber btn-lg"
+                style="width:100%;justify-content:center;margin-bottom:.85rem;">
+                Get Free Exact Quote →
+              </a>
+              <a href="tel:5035550182" class="btn btn-outline-white"
+                style="width:100%;justify-content:center;font-size:.78rem;">
+                📞 (503) 555-0182
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div><!-- /.calc-wrap -->
+
+      <p
+        style="text-align:center;font-size:.76rem;color:var(--ink-faint);margin-top:2rem;max-width:700px;margin-inline:auto;line-height:1.7;">
+        Estimates are based on average Portland metro market rates and provided for planning purposes only. Precision
+        Painting Co. provides free in-home estimates with detailed, binding written quotes. Prices vary based on paint
+        selection, surface condition, accessibility, and complexity.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-brand">
+        <a href="index.html" class="site-logo">
+          <div class="logo-mark">P</div>Precision<span class="logo-accent">Paint</span>
+        </a>
+        <p class="footer-tagline">Portland's most trusted residential and commercial painting contractor since 2008.
+          Licensed, bonded, insured.</p>
+        <div class="footer-contact">
+          <a href="tel:5035550182">📞 (503) 555-0182</a>
+          <a href="mailto:hello@precisionpaintco.com">✉ hello@precisionpaintco.com</a>
+          <span>📍 Portland, OR · Serving Metro Area</span>
+        </div>
+        <div class="footer-badges">
+          <span class="footer-badge">Licensed #CCB-182744</span>
+          <span class="footer-badge">Fully Insured</span>
+          <span class="footer-badge">EPA RRP Certified</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="interior-painting.html">Interior Painting</a>
+        <a href="exterior-painting.html">Exterior Painting</a>
+        <a href="cabinet-painting.html">Cabinet Painting</a>
+        <a href="drywall-repair.html">Drywall Repair</a>
+        <a href="color-consultation.html">Color Consultation</a>
+        <a href="deck-fence-staining.html">Deck &amp; Fence Staining</a>
+        <a href="wallpaper-removal.html">Wallpaper Removal</a>
+        <a href="commercial-painting.html">Commercial</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="about.html">About Us</a>
+        <a href="gallery.html">Portfolio</a>
+        <a href="testimonials.html">Reviews</a>
+        <a href="warranty.html">Our Warranty</a>
+        <a href="service-area.html">Service Area</a>
+        <a href="blog.html">Blog</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h4>Get Started</h4>
+        <a href="request-quote.html">Free Estimate</a>
+        <a href="booking.html">Book a Consult</a>
+        <a href="estimate-calculator.html">Cost Calculator</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="warranty.html">2-Year Warranty</a>
+      </div>
+    </div>
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2024 Precision Painting Co. All rights reserved.</span>
+        <span>
+          <a href="privacy-policy.html">Privacy Policy</a> ·
+          <a href="terms.html">Terms of Service</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="shared.js"></script>
+  <script>
+    'use strict';
+
+    /* ── SERVICE DEFINITIONS ──────────────────────────────────── */
+    const SERVICES = [
+      { id: 'interior', icon: '🏠', name: 'Interior Painting', unit: 'sqft', unitLabel: 'Sq Ft', defaultQty: 1500, hasColors: true, rates: { low: 1.40, high: 2.20 }, note: 'Walls, ceilings, trim & doors' },
+      { id: 'exterior', icon: '🏡', name: 'Exterior Painting', unit: 'sqft', unitLabel: 'Sq Ft', defaultQty: 2000, hasColors: true, rates: { low: 2.00, high: 3.20 }, note: 'Siding, trim, fascia & soffits' },
+      { id: 'residential', icon: '🏘️', name: 'Residential (Full)', unit: 'sqft', unitLabel: 'Total Sq Ft', defaultQty: 2200, hasColors: true, rates: { low: 1.60, high: 2.60 }, note: 'Interior + exterior combined' },
+      { id: 'commercial', icon: '🏢', name: 'Commercial', unit: 'sqft', unitLabel: 'Sq Ft', defaultQty: 5000, hasColors: true, rates: { low: 1.80, high: 2.80 }, note: 'Offices, retail & multi-family' },
+      { id: 'cabinet', icon: '🗄️', name: 'Cabinet Painting', unit: 'doors', unitLabel: 'Cabinet Doors', defaultQty: 30, hasColors: false, rates: { low: 55, high: 95 }, note: 'Per door, spray-applied finish' },
+      { id: 'wallpaper', icon: '📄', name: 'Wallpaper Removal', unit: 'sqft', unitLabel: 'Sq Ft', defaultQty: 400, hasColors: false, rates: { low: 1.50, high: 4.00 }, note: 'All types incl. glue removal' },
+    ];
+
+    /* ── STATE ────────────────────────────────────────────────── */
+    const state = { selected: new Set(), qty: {}, colors: {} };
+
+    /* ── DOM REFS ─────────────────────────────────────────────── */
+    const picker = document.getElementById('svcPicker');
+    const selList = document.getElementById('selectedList');
+    const selSec = document.getElementById('selectedSection');
+    const emptyState = document.getElementById('emptyState');
+    const selCount = document.getElementById('selectedCount');
+    const resultEmpty = document.getElementById('resultEmpty');
+    const resultContent = document.getElementById('resultContent');
+
+    /* ── BUILD CHIPS ──────────────────────────────────────────── */
+    SERVICES.forEach(svc => {
+      const el = document.createElement('div');
+      el.className = 'svc-chip';
+      el.dataset.id = svc.id;
+      el.setAttribute('role', 'checkbox');
+      el.setAttribute('aria-checked', 'false');
+      el.setAttribute('tabindex', '0');
+      el.innerHTML = `<span class="svc-chip__icon">${svc.icon}</span><span class="svc-chip__name">${svc.name}</span><span class="svc-chip__check">✓</span>`;
+      el.addEventListener('click', () => toggleService(svc.id));
+      el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleService(svc.id); } });
+      picker.appendChild(el);
+    });
+
+    /* ── TOGGLE SERVICE ───────────────────────────────────────── */
+    function toggleService(id) {
+      const chip = picker.querySelector(`[data-id="${id}"]`);
+      if (state.selected.has(id)) {
+        state.selected.delete(id);
+        chip.classList.remove('active');
+        chip.setAttribute('aria-checked', 'false');
+        document.getElementById(`sel-${id}`)?.remove();
+      } else {
+        state.selected.add(id);
+        chip.classList.add('active');
+        chip.setAttribute('aria-checked', 'true');
+        const svc = SERVICES.find(s => s.id === id);
+        state.qty[id] = svc.defaultQty;
+        state.colors[id] = '1';
+        renderItem(svc);
+      }
+      updateUI();
+      recalculate();
+    }
+
+    /* ── RENDER SELECTED ITEM ─────────────────────────────────── */
+    function renderItem(svc) {
+      const el = document.createElement('div');
+      el.className = 'selected-item';
+      el.id = `sel-${svc.id}`;
+
+      const colorInput = svc.hasColors ? `
+    <div class="field">
+      <label class="label" style="font-size:.65rem;">Colors</label>
+      <select class="select" id="clr-${svc.id}"
+        onchange="state.colors['${svc.id}']=this.value;recalculate()">
+        <option value="1">1 color</option>
+        <option value="1.1">2 colors</option>
+        <option value="1.2">3+ / accents</option>
+      </select>
+    </div>` : '';
+
+      const cols = svc.hasColors ? '1fr 1fr 1fr' : '1fr 1fr';
+      const qtySpan = svc.hasColors ? 'grid-column:1/3;' : '';
+
+      el.innerHTML = `
+    <div class="selected-item__header">
+      <span class="selected-item__title"><span>${svc.icon}</span>${svc.name}</span>
+      <button class="selected-item__remove" title="Remove" aria-label="Remove ${svc.name}"
+        onclick="toggleService('${svc.id}')">×</button>
+    </div>
+    <div class="selected-item__inputs" style="grid-template-columns:${cols};">
+      <div class="field" style="${qtySpan}">
+        <label class="label" style="font-size:.65rem;">${svc.unitLabel}</label>
+        <input class="input" type="number" id="qty-${svc.id}"
+          value="${svc.defaultQty}" min="1" placeholder="${svc.defaultQty}"
+          oninput="state.qty['${svc.id}']=parseFloat(this.value)||${svc.defaultQty};recalculate()"/>
+      </div>
+      ${colorInput}
+    </div>`;
+      selList.appendChild(el);
+    }
+
+    /* ── SHOW / HIDE UI ───────────────────────────────────────── */
+    function updateUI() {
+      const any = state.selected.size > 0;
+      emptyState.style.display = any ? 'none' : 'flex';
+      selSec.style.display = any ? 'block' : 'none';
+      selCount.textContent = `${state.selected.size} service${state.selected.size !== 1 ? 's' : ''} selected`;
+    }
+
+    /* ── CALCULATE ────────────────────────────────────────────── */
+    document.getElementById('calcBtn').addEventListener('click', recalculate);
+
+    function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
+
+    function recalculate() {
+      if (state.selected.size === 0) {
+        resultEmpty.style.display = 'flex';
+        resultContent.style.display = 'none';
+        return;
+      }
+      const condition = parseFloat(document.getElementById('globalCondition').value);
+      let totalLow = 0, totalHigh = 0;
+      const rows = [];
+
+      state.selected.forEach(id => {
+        const svc = SERVICES.find(s => s.id === id);
+        const qty = state.qty[id] || svc.defaultQty;
+        const clr = parseFloat(state.colors[id] || '1');
+        let low, high;
+        if (svc.unit === 'flat') {
+          low = svc.rates.low;
+          high = svc.rates.high;
+        } else if (svc.unit === 'doors') {
+          low = Math.round(svc.rates.low * qty * condition / 50) * 50;
+          high = Math.round(svc.rates.high * qty * condition / 50) * 50;
+        } else {
+          low = Math.round(svc.rates.low * qty * condition * clr / 50) * 50;
+          high = Math.round(svc.rates.high * qty * condition * clr / 50) * 50;
+        }
+        totalLow += low;
+        totalHigh += high;
+        const clrLabel = { '1': '1 color', '1.1': '2 colors', '1.2': '3+ colors' }[state.colors[id]];
+        rows.push({ svc, qty, low, high, clrLabel });
+      });
+
+      resultEmpty.style.display = 'none';
+      resultContent.style.display = 'block';
+
+      document.getElementById('rTotalLow').textContent = fmt(totalLow);
+      document.getElementById('rTotalHigh').textContent = fmt(totalHigh);
+      document.getElementById('rLabor').textContent = `${fmt(totalLow * .65)} – ${fmt(totalHigh * .65)}`;
+      document.getElementById('rMaterials').textContent = `${fmt(totalLow * .35)} – ${fmt(totalHigh * .35)}`;
+
+      const list = document.getElementById('rServiceList');
+      list.innerHTML = '';
+
+      if (rows.length > 1) {
+        const hd = document.createElement('p');
+        hd.style.cssText = 'font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:.6rem;';
+        hd.textContent = 'Per Service';
+        list.appendChild(hd);
+      }
+
+      rows.forEach(({ svc, qty, low, high, clrLabel }) => {
+        const row = document.createElement('div');
+        row.className = 'result-svc-row';
+        const meta = [];
+        if (svc.unit !== 'flat') meta.push(`${qty.toLocaleString()} ${svc.unitLabel.toLowerCase()}`);
+        if (clrLabel && svc.hasColors) meta.push(clrLabel);
+        meta.push(svc.note);
+        row.innerHTML = `
+      <div class="result-svc-row__top">
+        <span class="result-svc-name"><span>${svc.icon}</span>${svc.name}</span>
+        <span class="result-svc-range">${fmt(low)} – ${fmt(high)}</span>
+      </div>
+      <div class="result-svc-meta">${meta.map(m => `<span>${m}</span>`).join('')}</div>`;
+        list.appendChild(row);
+      });
+    }
+
+    updateUI();
+  </script>
+</body>
+
+</html>
