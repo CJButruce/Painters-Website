@@ -11,6 +11,7 @@
     href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="shared.css" />
+
   <style>
     .about-grid {
       display: grid;
@@ -31,13 +32,14 @@
       border: 1px solid var(--border);
       border-radius: var(--r-lg);
       padding: 2rem 1.25rem;
+      height: 100%;
     }
 
     .team-photo {
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      margin: 0 auto .85rem;
+      margin: 0 auto 0.85rem;
       border: 3px solid var(--amber-dim);
     }
 
@@ -47,19 +49,161 @@
       gap: 1rem;
     }
 
-    @media(max-width:900px) {
+    .trust-strip {
+      background: var(--paper);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 0;
+    }
+
+    .trust-bar__items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .trust-bar__item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--ink-muted);
+    }
+
+    .about-visual {
+      min-height: 320px;
+      aspect-ratio: 4 / 3;
+      border-radius: var(--r-xl);
+    }
+
+    .stats-panel {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      background: var(--navy);
+      border-radius: var(--r-xl);
+      padding: 3rem;
+    }
+
+    .home-cta {
+      background: var(--navy);
+      padding: 4.5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .home-cta__bg {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -55deg,
+        transparent 0px,
+        transparent 40px,
+        rgba(255,255,255,.015) 40px,
+        rgba(255,255,255,.015) 41px
+      );
+      pointer-events: none;
+    }
+
+    .home-cta__glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,168,50,.1) 0%, transparent 70%);
+      top: -150px;
+      right: -80px;
+      pointer-events: none;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1024px) {
       .about-grid {
-        grid-template-columns: 1fr;
+        gap: 3rem;
       }
 
       .team-grid {
         grid-template-columns: 1fr 1fr;
       }
+
+      .stats-panel {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem 1.5rem;
+        padding: 2.25rem;
+      }
     }
 
-    @media(max-width:540px) {
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-visual {
+        min-height: 280px;
+      }
+
+      .trust-bar__items {
+        gap: 1rem 2rem;
+        justify-content: flex-start;
+      }
+
+      .trust-bar__item {
+        width: calc(50% - 1rem);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .about-grid {
+        gap: 2rem;
+      }
+
       .team-grid {
         grid-template-columns: 1fr;
+      }
+
+      .team-card {
+        padding: 1.5rem 1rem;
+      }
+
+      .team-photo {
+        width: 72px;
+        height: 72px;
+      }
+
+      .cert-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-bar__item {
+        width: 100%;
+      }
+
+      .stats-panel {
+        grid-template-columns: 1fr;
+        padding: 2rem 1.25rem;
+      }
+
+      .cta-row {
+        flex-direction: column;
+      }
+
+      .cta-row .btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-visual {
+        min-height: 240px;
       }
     }
   </style>
@@ -73,29 +217,40 @@
     <span class="top-bar__sep">|</span>
     <a href="request-quote.html">Free Estimate →</a>
   </div>
+
   <header class="site-header">
     <div class="container">
       <a href="index.html" class="site-logo">
         <div class="logo-mark">P</div>Precision<span class="logo-accent">Paint</span>
       </a>
+
       <nav class="site-nav">
         <a href="index.html">Home</a>
         <div class="nav-dropdown">
           <a href="services.html">Services</a>
           <div class="nav-dropdown__menu">
-            <a href="services.html#interior">Interior Painting</a><a href="services.html#exterior">Exterior Painting</a>
-            <a href="services.html#residential">Residential</a><a href="services.html#commercial">Commercial</a>
-            <a href="services.html#cabinet">Cabinet Painting</a><a href="services.html#color">Color Consultation</a>
-            <a href="services.html#drywall">Drywall Repair</a><a href="services.html#wallpaper">Wallpaper Removal</a>
+            <a href="services.html#interior">Interior Painting</a>
+            <a href="services.html#exterior">Exterior Painting</a>
+            <a href="services.html#residential">Residential</a>
+            <a href="services.html#commercial">Commercial</a>
+            <a href="services.html#cabinet">Cabinet Painting</a>
+            <a href="services.html#color">Color Consultation</a>
+            <a href="services.html#drywall">Drywall Repair</a>
+            <a href="services.html#wallpaper">Wallpaper Removal</a>
             <a href="services.html#deck">Deck &amp; Fence</a>
           </div>
         </div>
-        <a href="gallery.html">Gallery</a><a href="testimonials.html">Reviews</a>
-        <a href="blog.html">Blog</a><a href="about.html">About</a><a href="contact.html">Contact</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="testimonials.html">Reviews</a>
+        <a href="blog.html">Blog</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
       </nav>
+
       <div class="nav-end">
         <a href="tel:5035550182" class="nav-phone">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            aria-hidden="true">
             <path
               d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.28 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
           </svg>
@@ -103,56 +258,69 @@
         </a>
         <a href="request-quote.html" class="btn btn-amber btn-sm">Free Quote</a>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </header>
+
   <div class="mobile-menu" id="mobileMenu">
     <div class="mobile-menu__overlay"></div>
     <div class="mobile-menu__panel">
-      <a href="index.html">Home</a><a href="services.html#interior">Interior Painting</a><a href="#exterior">Exterior
-        Painting</a>
-      <a href="services.html#residential">Residential</a><a href="services.html#commercial">Commercial</a><a
-        href="services.html#cabinet">Cabinets</a>
-      <a href="services.html#color">Color Consultation</a><a href="services.html#drywall">Drywall</a>
-      <a href="services.html#wallpaper">Wallpaper</a><a href="services.html#deck">Deck &amp; Fence</a>
-      <a href="gallery.html">Gallery</a><a href="testimonials.html">Reviews</a><a href="about.html">About</a>
+      <a href="index.html">Home</a>
+      <a href="services.html#interior">Interior Painting</a>
+      <a href="services.html#exterior">Exterior Painting</a>
+      <a href="services.html#residential">Residential</a>
+      <a href="services.html#commercial">Commercial</a>
+      <a href="services.html#cabinet">Cabinets</a>
+      <a href="services.html#color">Color Consultation</a>
+      <a href="services.html#drywall">Drywall</a>
+      <a href="services.html#wallpaper">Wallpaper</a>
+      <a href="services.html#deck">Deck &amp; Fence</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="testimonials.html">Reviews</a>
+      <a href="about.html">About</a>
       <a href="request-quote.html" class="btn btn-amber" style="margin-top:1.25rem;text-align:center;">Free Estimate
         →</a>
     </div>
   </div>
 
-  <section class="page-hero ">
+  <section class="page-hero">
     <div class="page-hero__bg">
       <div class="hero-stripes"></div>
       <div class="hero-glow"></div>
     </div>
-    <div class="container">
-      <nav class="breadcrumbs"><a href="index.html">Home</a><span class="breadcrumbs__sep">/</span><span>About</span>
-      </nav>
-      <p class="overline animate-up">Our Story</p>
-      <h1 class="display-title animate-up-1"
-        style="font-size:clamp(2.2rem,5vw,4rem);color:var(--white);max-width:680px;">Portland's Most Trusted Painters
-        Since 2008</h1>
-      <p class="body-lg animate-up-2" style="max-width:560px;margin-top:1.25rem;color:rgba(255,255,255,0.65);">From a
-        single van to a full crew of certified professionals — we've spent 16 years building a reputation on quality,
-        honesty, and results that actually last.</p>
 
+    <div class="container">
+      <nav class="breadcrumbs">
+        <a href="index.html">Home</a>
+        <span class="breadcrumbs__sep">/</span>
+        <span>About</span>
+      </nav>
+
+      <p class="overline animate-up">Our Story</p>
+
+      <h1 class="display-title animate-up-1"
+        style="font-size:clamp(2.2rem,5vw,4rem);color:var(--white);max-width:680px;">
+        Portland's Most Trusted Painters Since 2008
+      </h1>
+
+      <p class="body-lg animate-up-2" style="max-width:560px;margin-top:1.25rem;color:rgba(255,255,255,0.65);">
+        From a single van to a full crew of certified professionals — we've spent 16 years building a reputation on
+        quality, honesty, and results that actually last.
+      </p>
     </div>
   </section>
-  <div
-    style="background:var(--paper);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1.25rem 0;">
+
+  <div class="trust-strip">
     <div class="container">
-      <div style="display:flex;align-items:center;justify-content:center;gap:3rem;flex-wrap:wrap;">
-        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
-          ⭐ <strong style="color:var(--ink);">5.0</strong> Google Rating (340+ reviews)</div>
-        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
-          🏅 Licensed &amp; Insured</div>
-        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
-          🛡 2-Year Workmanship Warranty</div>
-        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
-          ✓ Free Detailed Estimates</div>
-        <div style="display:flex;align-items:center;gap:.6rem;font-size:.82rem;font-weight:500;color:var(--ink-muted);">
-          📅 Same-Week Scheduling</div>
+      <div class="trust-bar__items">
+        <div class="trust-bar__item">⭐ <strong style="color:var(--ink);">5.0</strong> Google Rating (340+ reviews)</div>
+        <div class="trust-bar__item">🏅 Licensed &amp; Insured</div>
+        <div class="trust-bar__item">🛡 2-Year Workmanship Warranty</div>
+        <div class="trust-bar__item">✓ Free Detailed Estimates</div>
+        <div class="trust-bar__item">📅 Same-Week Scheduling</div>
       </div>
     </div>
   </div>
@@ -161,19 +329,25 @@
     <div class="container">
       <div class="about-grid">
         <div class="reveal">
-          <div class="ph ph-7" style="aspect-ratio:4/3;border-radius:var(--r-xl);min-height:320px;"><span
-              style="font-size:4rem;">🖌️</span></div>
+          <div class="ph ph-7 about-visual"><span style="font-size:4rem;">🖌️</span></div>
         </div>
+
         <div class="reveal">
           <p class="overline">Founded 2008</p>
           <h2 class="section-title" style="margin-bottom:1.5rem;">Built on <em>craft &amp; reputation</em></h2>
-          <p class="body-lg" style="margin-bottom:1.25rem;">Marcus Donovan started Precision Painting Co. in his garage
-            with a used sprayer and a commitment to doing things the right way — even when no one was watching. Sixteen
-            years later, that commitment is the backbone of everything we do.</p>
-          <p style="font-size:.95rem;color:var(--ink-muted);line-height:1.75;margin-bottom:2rem;">We've grown from a
-            one-man operation to a crew of 14 certified painters, serving over 2,000 homes and businesses across
-            Portland and the surrounding metro area. Every job we take on gets the same attention and respect — from a
-            single accent wall to a full commercial repaint.</p>
+
+          <p class="body-lg" style="margin-bottom:1.25rem;">
+            Marcus Donovan started Precision Painting Co. in his garage with a used sprayer and a commitment to doing
+            things the right way — even when no one was watching. Sixteen years later, that commitment is the backbone
+            of everything we do.
+          </p>
+
+          <p style="font-size:.95rem;color:var(--ink-muted);line-height:1.75;margin-bottom:2rem;">
+            We've grown from a one-man operation to a crew of 14 certified painters, serving over 2,000 homes and
+            businesses across Portland and the surrounding metro area. Every job we take on gets the same attention and
+            respect — from a single accent wall to a full commercial repaint.
+          </p>
+
           <ul class="checklist">
             <li>Licensed Oregon contractor #CCB-182744</li>
             <li>Fully bonded and liability insured ($2M coverage)</li>
@@ -192,15 +366,24 @@
         <p class="overline">Our Numbers</p>
         <h2 class="section-title">16 years of <em>results</em></h2>
       </div>
-      <div
-        style="display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;background:var(--navy);border-radius:var(--r-xl);padding:3rem;"
-        class="reveal">
-        <div class="stat-item"><span class="stat-num">2,000+</span><span class="stat-label">Projects Completed</span>
+
+      <div class="stats-panel reveal">
+        <div class="stat-item">
+          <span class="stat-num">2,000+</span>
+          <span class="stat-label">Projects Completed</span>
         </div>
-        <div class="stat-item"><span class="stat-num">5.0</span><span class="stat-label">Average Google Rating</span>
+        <div class="stat-item">
+          <span class="stat-num">5.0</span>
+          <span class="stat-label">Average Google Rating</span>
         </div>
-        <div class="stat-item"><span class="stat-num">14</span><span class="stat-label">Certified Painters</span></div>
-        <div class="stat-item"><span class="stat-num">16yr</span><span class="stat-label">In Business</span></div>
+        <div class="stat-item">
+          <span class="stat-num">14</span>
+          <span class="stat-label">Certified Painters</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">16yr</span>
+          <span class="stat-label">In Business</span>
+        </div>
       </div>
     </div>
   </section>
@@ -211,59 +394,71 @@
         <p class="overline">The Team</p>
         <h2 class="section-title">The people <em>behind the brush</em></h2>
       </div>
+
       <div class="team-grid">
         <div class="team-card reveal">
-          <div class="team-photo ph ph-7"></div><strong style="font-family:var(--font-disp);font-size:1rem;">Marcus
-            Donovan</strong>
+          <div class="team-photo ph ph-7"></div>
+          <strong style="font-family:var(--font-disp);font-size:1rem;">Marcus Donovan</strong>
           <p
             style="font-size:.78rem;color:var(--amber);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:.25rem;">
-            Founder &amp; CEO</p>
-          <p style="font-size:.82rem;color:var(--ink-muted);margin-top:.5rem;">16 years' experience. Sherwin-Williams
-            certified colorist.</p>
+            Founder &amp; CEO
+          </p>
+          <p style="font-size:.82rem;color:var(--ink-muted);margin-top:.5rem;">
+            16 years' experience. Sherwin-Williams certified colorist.
+          </p>
         </div>
+
         <div class="team-card reveal">
-          <div class="team-photo ph ph-2"></div><strong style="font-family:var(--font-disp);font-size:1rem;">Sarah
-            Chen</strong>
+          <div class="team-photo ph ph-2"></div>
+          <strong style="font-family:var(--font-disp);font-size:1rem;">Sarah Chen</strong>
           <p
             style="font-size:.78rem;color:var(--amber);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:.25rem;">
-            Lead Estimator</p>
-          <p style="font-size:.82rem;color:var(--ink-muted);margin-top:.5rem;">Detailed estimates, zero surprises. 8
-            years with Precision.</p>
+            Lead Estimator
+          </p>
+          <p style="font-size:.82rem;color:var(--ink-muted);margin-top:.5rem;">
+            Detailed estimates, zero surprises. 8 years with Precision.
+          </p>
         </div>
+
         <div class="team-card reveal">
-          <div class="team-photo ph ph-3"></div><strong style="font-family:var(--font-disp);font-size:1rem;">Danny
-            Reyes</strong>
+          <div class="team-photo ph ph-3"></div>
+          <strong style="font-family:var(--font-disp);font-size:1rem;">Danny Reyes</strong>
           <p
             style="font-size:.78rem;color:var(--amber);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:.25rem;">
-            Crew Lead</p>
-          <p style="font-size:.82rem;color:var(--ink-muted);margin-top:.5rem;">12 years of commercial and residential
-            experience.</p>
+            Crew Lead
+          </p>
+          <p style="font-size:.82rem;color:var(--ink-muted);margin-top:.5rem;">
+            12 years of commercial and residential experience.
+          </p>
         </div>
+
         <div class="team-card reveal">
-          <div class="team-photo ph ph-5"></div><strong style="font-family:var(--font-disp);font-size:1rem;">Ava
-            Torres</strong>
+          <div class="team-photo ph ph-5"></div>
+          <strong style="font-family:var(--font-disp);font-size:1rem;">Ava Torres</strong>
           <p
             style="font-size:.78rem;color:var(--amber);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-top:.25rem;">
-            Color Consultant</p>
-          <p style="font-size:.82rem;color:var(--ink-muted);margin-top:.5rem;">NCIDQ candidate. Your home's color story
-            is her passion.</p>
+            Color Consultant
+          </p>
+          <p style="font-size:.82rem;color:var(--ink-muted);margin-top:.5rem;">
+            NCIDQ candidate. Your home's color story is her passion.
+          </p>
         </div>
       </div>
     </div>
   </section>
-  <section style="background:var(--navy);padding:4.5rem 0;position:relative;overflow:hidden;">
-    <div
-      style="position:absolute;inset:0;background:repeating-linear-gradient(-55deg,transparent 0px,transparent 40px,rgba(255,255,255,.015) 40px,rgba(255,255,255,.015) 41px);pointer-events:none;">
-    </div>
-    <div
-      style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(232,168,50,.1) 0%,transparent 70%);top:-150px;right:-80px;pointer-events:none;">
-    </div>
+
+  <section class="home-cta">
+    <div class="home-cta__bg"></div>
+    <div class="home-cta__glow"></div>
+
     <div class="container" style="text-align:center;position:relative;z-index:2;">
       <p class="overline reveal" style="color:var(--amber);">Take the Next Step</p>
       <h2 class="section-title section-title--white reveal" style="margin-bottom:1rem;">Let's work together</h2>
-      <p class="reveal" style="color:rgba(255,255,255,.55);max-width:500px;margin:0 auto 2.5rem;font-size:1rem;">Join
-        2,000+ satisfied Portland homeowners. Your estimate is free.</p>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;" class="reveal">
+      <p class="reveal" style="color:rgba(255,255,255,.55);max-width:500px;margin:0 auto 2.5rem;font-size:1rem;">
+        Join 2,000+ satisfied Portland homeowners. Your estimate is free.
+      </p>
+
+      <div class="cta-row reveal">
         <a href="request-quote.html" class="btn btn-amber btn-xl">Get Free Estimate</a>
         <a href="tel:5035550182" class="btn btn-outline-white btn-xl">📞 (503) 555-0182</a>
       </div>
@@ -276,19 +471,25 @@
         <a href="index.html" class="site-logo">
           <div class="logo-mark">P</div>Precision<span class="logo-accent">Paint</span>
         </a>
-        <p class="footer-tagline">Portland's most trusted residential and commercial painting contractor since 2008.
-          Licensed, bonded, insured.</p>
+
+        <p class="footer-tagline">
+          Portland's most trusted residential and commercial painting contractor since 2008.
+          Licensed, bonded, insured.
+        </p>
+
         <div class="footer-contact">
           <a href="tel:5035550182">📞 (503) 555-0182</a>
           <a href="mailto:hello@precisionpaintco.com">✉ hello@precisionpaintco.com</a>
           <span>📍 Portland, OR · Serving Metro Area</span>
         </div>
+
         <div class="footer-badges">
           <span class="footer-badge">Licensed #CCB-182744</span>
           <span class="footer-badge">Fully Insured</span>
           <span class="footer-badge">EPA RRP Certified</span>
         </div>
       </div>
+
       <div class="footer-col">
         <h4>Services</h4>
         <a href="interior-painting.html">Interior Painting</a>
@@ -300,6 +501,7 @@
         <a href="wallpaper-removal.html">Wallpaper Removal</a>
         <a href="commercial-painting.html">Commercial</a>
       </div>
+
       <div class="footer-col">
         <h4>Company</h4>
         <a href="about.html">About Us</a>
@@ -310,6 +512,7 @@
         <a href="blog.html">Blog</a>
         <a href="faq.html">FAQ</a>
       </div>
+
       <div class="footer-col">
         <h4>Get Started</h4>
         <a href="request-quote.html">Free Estimate</a>
@@ -319,6 +522,7 @@
         <a href="warranty.html">2-Year Warranty</a>
       </div>
     </div>
+
     <div class="container">
       <div class="footer-bottom">
         <span>© 2024 Precision Painting Co. All rights reserved.</span>
@@ -330,8 +534,8 @@
       </div>
     </div>
   </footer>
-  <script src="shared.js"></script>
 
+  <script src="shared.js"></script>
 </body>
 
 </html>
