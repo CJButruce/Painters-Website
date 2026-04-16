@@ -26,6 +26,17 @@
   --border:    #d8d0c6;
   --border-2:  #c8bfb4;
 
+   /*Text & Lines pallette*/
+   --off-white: #E6E6E6
+   --gold:      #C9A35A
+   /*Lucart Core Palette*/
+   --burntRO:   #D14A36
+   --wrm-yel:   #D4A85A
+   --cream:     #E8E0CF
+   --navy-blue: #3F5A6E
+   --bkgrnd:    #0D1117
+
+
   /* Status */
   --green:     #2e7d52;
   --green-dim: rgba(46,125,82,0.1);
@@ -184,7 +195,7 @@ select {
   width: 36px;
   height: 36px;
   border-radius: var(--r-sm);
-  background: var(--amber);
+  background: var(--bkgrnd);
   display: flex;
   align-items: center;
   justify-content: center;
